@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load leaflet_tags %}
+{% load static %}
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load humanize %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load widget_tweaks %}
+<!-- Importing Leaflet CSS and JS libraries -->
+
+{% leaflet_js %}
+{% leaflet_css %} 
+
+
+<link rel="stylesheet" href="{% static 'portfolio/portfoliomain.css' %}">
+</head>
+<body>
+  <!-- Navbar-->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+      <a href="{% url 'contact_create_view' %}" class="navbar-brand">Jack Colpitt</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="{% url 'resume' %}" class="nav-link">Resume</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link">Projects</a>
+          </li> -->
+          <li class="nav-item">
+            <a href="{% url 'notebook' %}" class="nav-link">Notebook Example</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  </nav>
+  
+  {% block mainpage %}
+  {% endblock mainpage %}
+  {% block notebook %}
+  {% endblock notebook %}
+  {% block resume %}
+  {% endblock resume %}
+</body>
+</html>

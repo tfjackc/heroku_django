@@ -1,0 +1,33 @@
+@media(min-width: 768px) {
+    .news-input {
+        width: 50%;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+      overflow-x: auto;
+    }
+  }
+
+
+
+.card {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+   
+}
+
+.leaflet-container {
+    height: 400px;
+    width: auto;
+    margin: 50px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .col-md {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
