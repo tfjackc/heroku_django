@@ -62,7 +62,9 @@ def valuation(request, account):
                         veterans[yr] = feature['attributes']['exempt']
 
 
-    context = {'data':jsonResponse, 'value_data':jsonValueResponse, 'maptaxlot': maptaxlot, 'structure':structure, 'value_structure':value_structure, 'max_assessed':max_assessed, 'real_market_value':real_market_value, 'total_real_market':total_real_market, 'total_assessed':total_assessed, 'veterans':veterans}
+    context = {'data':jsonResponse, 'value_data':jsonValueResponse, 'maptaxlot': maptaxlot, 'structure':structure, 
+    'value_structure':value_structure, 'max_assessed':max_assessed, 'real_market_value':real_market_value, 'total_real_market':total_real_market, 
+    'total_assessed':total_assessed, 'veterans':veterans}
     
     return render(request, 'pats/valuation.html', context)
 

@@ -5,7 +5,7 @@
 {% bootstrap_css %} 
 {% bootstrap_javascript %}
 <!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% block content %} 
 {% for feature in data.features %} 
 
@@ -62,7 +62,7 @@
               <td>${{value_structure.2021|intcomma}}</td>
               <td>${{value_structure.2022|intcomma}}</td>
             </tr>
-            <tr>
+            <tr class="table-danger">
               <th scope="row">Total Real Market Value</th>
               <td>${{total_real_market.2018|intcomma}}</td>
               <td>${{total_real_market.2019|intcomma}}</td>
@@ -70,7 +70,7 @@
               <td>${{total_real_market.2021|intcomma}}</td>
               <td>${{total_real_market.2022|intcomma}}</td>
             </tr>
-            <tr>
+            <tr class="table-primary">
               <th scope="row">Maximum Assessed Value</th>
               <td>${{max_assessed.2018|intcomma}}</td>
               <td>${{max_assessed.2019|intcomma}}</td>
@@ -109,57 +109,55 @@
     </div>
   </section>
 
-  
-  {% for key, value in real_market_value.items %}
-    <p id="data">{{ value }}</p>
-  {% endfor %}
-
   {% endblock %}
 
   {% block scripts %}
-  <script type="text/javascript">
-    // chart colors
-var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
-var totalMarket = document.getElementById("data")
-console.log(totalMarket);
-/* large line chart */
-var chLine = document.getElementById("chLine");
-var chartData = {
-  labels: ['2018', '2019', '2020', '2021', '2022'],
-  datasets: [{
-    data: [totalMarket],
-    backgroundColor: 'transparent',
-    borderColor: colors[0],
-    borderWidth: 4,
-    pointBackgroundColor: colors[0]
-  }
-//   {
-//     data: [639, 465, 493, 478, 589, 632, 674],
-//     backgroundColor: colors[3],
-//     borderColor: colors[1],
-//     borderWidth: 4,
-//     pointBackgroundColor: colors[1]
-//   }
-  ]
-};
-if (chLine) {
-  new Chart(chLine, {
-  type: 'line',
-  data: chartData,
-  options: {
-    scales: {
-      xAxes: [{
-        ticks: {
-          beginAtZero: false
-        }
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('chLine');
+
+    const trmv2018 = "{{ total_real_market.2018 | safe}}";
+    const trmv2019 = "{{ total_real_market.2019 | safe}}";
+    const trmv2020 = "{{ total_real_market.2020 | safe}}";
+    const trmv2021 = "{{ total_real_market.2021 | safe}}";
+    const trmv2022 = "{{ total_real_market.2022 | safe}}";
+
+    const mav2018 = "{{ max_assessed.2018 | safe}}";
+    const mav2019 = "{{ max_assessed.2019 | safe}}";
+    const mav2020 = "{{ max_assessed.2020 | safe}}";
+    const mav2021 = "{{ max_assessed.2021 | safe}}";
+    const mav2022 = "{{ max_assessed.2022 | safe}}";
+  
+    new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2018', '2019', '2020', '2021', '2022'],
+      datasets: [{
+        label: 'Total Real Market Value',
+        data: [trmv2018, trmv2019, trmv2020, trmv2021, trmv2022],
+        borderWidth: 3,
+        backgroundColor: "#9C0A00",
+
+      },
+      {
+        label: "Maximum Assessed Value",
+        data: [mav2018, mav2019, mav2020, mav2021, mav2022],
+        borderWidth: 3,
+        backgroundColor: "#0071DB",
       }]
     },
-    legend: {
-      display: false
-    },
-    responsive: true
-  }
+    options: {
+      scales: {
+        y: {
+            ticks: {
+                // Include a dollar sign in the ticks
+                callback: function(value, index, ticks) {
+                  return '$' + Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
+                }
+            }
+        }
+      }
+    }
   });
-}
   </script>
   {% endblock scripts %}
