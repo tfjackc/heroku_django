@@ -3,6 +3,9 @@ from django.http import HttpResponse
 import json
 import requests
 
+def mapPage(request):
+
+    return render(request, 'pats/mapPage.html')
 
 def index(request):
 

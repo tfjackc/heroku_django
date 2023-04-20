@@ -1,0 +1,35 @@
+<html>
+  <head> 
+{% load static %} 
+{% load humanize %} 
+{% load bootstrap5 %} 
+{% bootstrap_css %} 
+{% bootstrap_javascript %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="{% static 'pats/mapPage.css' %}">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.26/"></script>
+    <script src="{% static 'pats/mapPage.js' %}"></script>
+    <title>Crook County Property</title>
+  </head>
+  <body>
+    <div class="panel-container">
+      <div class="panel-side">
+        <div>
+          <h2>Account Search</h2>
+          <input type='text' id='txtName' placeholder='e.g., 1001'></input>
+          <button class="esri-widget" id="btnQuery">Search!</button>
+          <br />
+          <br />
+        </div>
+        <div id="checkboxdiv">
+          <input type="checkbox" id="checkBoxLayer" checked />
+          <label for="checkBoxLayer">Land Group Layer Visibility</label>
+        </div>
+        <div id="paneDiv" class="esri-widget"></div>
+      </div>
+      <div id="viewDiv"></div>
+    </div>
+  </body>
+</html>
