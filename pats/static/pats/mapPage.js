@@ -31,31 +31,37 @@ const view = new MapView({
     sublayers: [{
       id: 0,
       visible: true,
-    },
+      popupTemplate: {
+        title: "Subdivision: {name}"
+    }},
     {
       id: 1,
       visible: true,
+      popupTemplate: {
+        title: "{MAPTAXLOT}",
+        content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br />",
+    }
     },
-    {
-      id: 2,
-      visible: false,
-    },
-    {
-      id: 3,
-      visible: false,
-    },
-    {
-      id: 4,
-      visible: false,
-    },
-    {
-      id: 5,
-      visible: false,
-    },
-    {
-      id: 6,
-      visible: false,
-    },
+    // {
+    //   id: 2,
+    //   visible: false,
+    // },
+    // {
+    //   id: 3,
+    //   visible: false,
+    // },
+    // {
+    //   id: 4,
+    //   visible: false,
+    // },
+    // {
+    //   id: 5,
+    //   visible: false,
+    // },
+    // {
+    //   id: 6,
+    //   visible: false,
+    // },
     {
       id: 7,
       visible: true,
