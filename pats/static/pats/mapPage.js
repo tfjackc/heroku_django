@@ -1,13 +1,15 @@
 require(["esri/Map",
          "esri/views/MapView",
          "esri/layers/FeatureLayer",
-         "esri/layers/MapImageLayer"
+         "esri/layers/MapImageLayer",
+         "esri/widgets/Legend",
 ],
 
          (Map,
           MapView,
           FeatureLayer,
-          MapImageLayer) => {
+          MapImageLayer,
+          Legend) => {
 
 const map = new Map({
   basemap: "topo-vector"
@@ -24,7 +26,7 @@ const view = new MapView({
   });
 
   // add feature from MapServer
-  const landGroup = new MapImageLayer({
+  const layer = new MapImageLayer({
     url: "https://geo.co.crook.or.us/server/rest/services/publicApp/landGroup/MapServer",
     sublayers: [{
       id: 0,
@@ -60,14 +62,71 @@ const view = new MapView({
     },]
   });
 
-  landGroup.when(function() {
-    console.log("should be loaded");
-  }).then(map.add(landGroup));
+  map.add(layer);
+ 
+
+  layer.when(() => {
+    
+    console.log("Layer loaded successfully");
+    layer.sublayers.map((sublayer) => {
+      const id = sublayer.id;
+      const visible = sublayer.visible;
+      const node = document.querySelector(
+        ".sublayers-item[data-id='" + id + "']"
+      );
+      if (visible) {
+        node.classList.add("visible-layer");
+      }
+    });
+  });
 
   var checkBox = document.getElementById("checkBoxLayer")
   
   checkBox.addEventListener("change", function(e) {
-    landGroup.visible = e.target.checked;
+   layer.visible = e.target.checked;
 });
+
+
+// const legend = new Legend({
+//     view: view,
+//     layerInfos: [
+//       {
+//         layer: landGroup,
+//         title: "Land Group",
+//         sublayers: [
+//           {
+//             id: 0,
+//             title: "Subdivisions",
+//           },
+//           {
+//             id: 1,
+//             title: "Taxlots",
+//           },
+//           {
+//             id: 7,
+//             title: "Pending",
+//           },
+
+//         ]
+//       }
+//     ]
+//   });
+
+//  view.ui.add(legend, "bottom-left");
+
+  const sublayersElement = document.querySelector(".sublayers");
+  sublayersElement.addEventListener("click", (event) => {
+    console.log("Click event listener is working");
+    const id = event.target.getAttribute("data-id");
+    if (id) {
+      const sublayer = layer.findSublayerById(parseInt(id));
+      const node = document.querySelector(
+        ".sublayers-item[data-id='" + id + "']"
+      );
+      sublayer.visible = !sublayer.visible;
+      console.log(`Sublayer ${sublayer.id} visibility: ${sublayer.visible}`);
+      node.classList.toggle("visible-layer");
+    }
+  });
   
 });

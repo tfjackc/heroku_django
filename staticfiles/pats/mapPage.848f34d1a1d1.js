@@ -62,7 +62,7 @@ const view = new MapView({
     },]
   });
 
-  map.add(layer);
+  map.add(landGroup);
  
 
   layer.when(() => {
