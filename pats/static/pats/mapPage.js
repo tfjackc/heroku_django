@@ -69,6 +69,12 @@ const view = new MapView({
     },]
   });
 
+  const prop_value = new FeatureLayer({
+    portalItem: {
+      id: "2187b11e8d774dbeb72d0e16d9e4f10e"
+    }
+  })
+
   map.add(layer);
  
 
