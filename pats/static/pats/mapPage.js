@@ -3,14 +3,15 @@ require(["esri/Map",
          "esri/layers/FeatureLayer",
          "esri/layers/MapImageLayer",
          "esri/widgets/Legend",
-         
+         "esri/rest/support/Query",
 ],
 
          (Map,
           MapView,
           FeatureLayer,
           MapImageLayer,
-          Legend) => {
+          Legend,
+          Query) => {
 
 const map = new Map({
   basemap: "topo-vector"
@@ -69,14 +70,16 @@ const view = new MapView({
     },]
   });
 
-  const prop_value = new FeatureLayer({
-    portalItem: {
-      id: "2187b11e8d774dbeb72d0e16d9e4f10e"
-    }
+  const prop = new FeatureLayer({
+    url: "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0",
+    // portalItem: {
+    //   id: "0ff09aa822904aa4aa9aca9f3457f334"
+    // },
+    //outFields: ["*"]
   })
 
   map.add(layer);
- 
+  map.add(prop);
 
   layer.when(() => {
     
@@ -148,8 +151,40 @@ var submitButton = document.getElementById("searchButton");
 submitButton.addEventListener("click", function() {
   console.log("button clicks");
   console.log(account_searched.value)
- // return getData(account_searched.value);
+
+  tableWhere = "account_id = '" + account_searched.value + "'"
+  //tableWhere="1=1"
+  console.log(tableWhere);
+
+  tableQuery = new Query({
+    where: tableWhere,
+    returnGeometry: false,
+    outFields: ["*"]
+    });
+   
+    prop.when(function() {
+      return prop.queryFeatures(tableQuery);
+    }).then(propResults)
 });
+
+
+function propResults(results) {
+  console.log("Query returned " + results.features.length + " features");
+  console.log(results); // Add this line to log the entire results object
+  results.features.forEach(function(feature) {
+    console.log("we are here");
+    console.log(feature);
+    //console.log(typeof feature.attributes);
+    //const obj = feature.attributes
+
+    for (const [key, value] of Object.entries(feature.attributes)) {
+      console.log(`${key}: ${value}`);
+    }
+
+  })
+};
+
+
 
 
 // const url = "/pats/get/ajax/mapData/"
