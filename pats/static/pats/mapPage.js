@@ -3,6 +3,7 @@ require(["esri/Map",
          "esri/layers/FeatureLayer",
          "esri/layers/MapImageLayer",
          "esri/widgets/Legend",
+         
 ],
 
          (Map,
@@ -134,5 +135,39 @@ const view = new MapView({
       node.classList.toggle("visible-layer");
     }
   });
+
+var account_searched = document.getElementById("account_entered");
+var submitButton = document.getElementById("searchButton");
+
+submitButton.addEventListener("click", function() {
+  console.log("button clicks");
+  console.log(account_searched.value)
+ // return getData(account_searched.value);
+});
+
+
+// const url = "/pats/get/ajax/mapData/"
+
+// const getData = (account_searched)=> {
+//   $.ajax({
+//     type: 'GET',
+//     url: url,
+//     data: {"account_searched": account_searched},
+//     complete: myCallback,
+//   });
+// };
+
+// function myCallback(response) {
+//   // Get the response data
+//   const data = response.responseText;
+
+//   // Update the "result" element with the response data
+//   $(".result").html(data);
+
+//   alert("Load was performed.");
+//   //const parsedData = JSON.parse(data);
+
+//   console.log(data);
+// }
   
 });
