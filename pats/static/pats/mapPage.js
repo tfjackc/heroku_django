@@ -28,7 +28,7 @@ const view = new MapView({
   });
 
   // add feature from MapServer
-  const layer = new MapImageLayer({
+  const landGroup = new MapImageLayer({
     url: "https://geo.co.crook.or.us/server/rest/services/publicApp/landGroup/MapServer",
     sublayers: [{
       id: 0,
@@ -41,7 +41,7 @@ const view = new MapView({
       visible: true,
       popupTemplate: {
         title: "{MAPTAXLOT}",
-        content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br />",
+        content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br /> Account: {ACCOUNT}",
     }
     },
     // {
@@ -70,21 +70,20 @@ const view = new MapView({
     },]
   });
 
+  const mtLayer = landGroup.sublayers.getItemAt(1);
+
   const prop = new FeatureLayer({
     url: "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0",
-    // portalItem: {
-    //   id: "0ff09aa822904aa4aa9aca9f3457f334"
-    // },
     //outFields: ["*"]
   })
 
-  map.add(layer);
+  map.add(landGroup);
   map.add(prop);
 
-  layer.when(() => {
+  landGroup.when(() => {
     
     console.log("Layer loaded successfully");
-    layer.sublayers.map((sublayer) => {
+    landGroup.sublayers.map((sublayer) => {
       const id = sublayer.id;
       const visible = sublayer.visible;
       const node = document.querySelector(
@@ -99,7 +98,7 @@ const view = new MapView({
   var checkBox = document.getElementById("checkBoxLayer")
   
   checkBox.addEventListener("change", function(e) {
-   layer.visible = e.target.checked;
+    landGroup.visible = e.target.checked;
 });
 
 
@@ -135,7 +134,7 @@ const view = new MapView({
     console.log("Click event listener is working");
     const id = event.target.getAttribute("data-id");
     if (id) {
-      const sublayer = layer.findSublayerById(parseInt(id));
+      const sublayer = landGroup.findSublayerById(parseInt(id));
       const node = document.querySelector(
         ".sublayers-item[data-id='" + id + "']"
       );
@@ -156,7 +155,7 @@ submitButton.addEventListener("click", function() {
   //tableWhere="1=1"
   console.log(tableWhere);
 
-  tableQuery = new Query({
+  const tableQuery = new Query({
     where: tableWhere,
     returnGeometry: false,
     outFields: ["*"]
@@ -167,48 +166,63 @@ submitButton.addEventListener("click", function() {
     }).then(propResults)
 });
 
+var account_list;
+account_list = [];
 
+ 
 function propResults(results) {
   console.log("Query returned " + results.features.length + " features");
-  console.log(results); // Add this line to log the entire results object
+  
+  let mt_whereClause;
+
   results.features.forEach(function(feature) {
-    console.log("we are here");
-    console.log(feature);
-    //console.log(typeof feature.attributes);
-    //const obj = feature.attributes
-
+    
     for (const [key, value] of Object.entries(feature.attributes)) {
-      console.log(`${key}: ${value}`);
+
+      if (`${key}` == 'map_taxlot') {
+        const maptaxlot = `${value}`
+        const strip_mt = maptaxlot.split("-").slice(0, 2).join("");
+        //const taxlotValue = [];
+        //taxlotValue.push(strip_mt);
+        //console.log(taxlotValue);
+
+        mt_whereClause = "MAPTAXLOT = '" + strip_mt + "'";
+        console.log(mt_whereClause);
+        //let mtLayer = landGroup.sublayers.getItemAt(1);
+
+        const mtQuery = new Query({
+          where: mt_whereClause,
+          returnGeometry: true,
+          outFields: ["*"]
+        });
+
+        //console.log(mtLayer); // check if mtLayer is defined and accessible
+        mtLayer.queryFeatures(mtQuery).then(function(mtResults) {
+          // do something with the mtResults here
+          console.log(mtResults.features);
+          console.log(mtResults.geometryType);
+          console.log(mtResults.fields);
+          // getting valid returns from console log, can it zoom to fullExtent?
+          //view.extent = mtResults.features.fullExtent;
+          if (mtResults.features.length > 0) {
+            const mtFeature = mtResults.features[0];
+            const mtFeatureExtent = mtResults.features[0].geometry.extent;
+            view.goTo({ extent: mtFeatureExtent }).then(function() {
+              view.popup.open({
+                features: [mtFeature],
+                location: mtFeature.geometry.centroid
+            });
+          });
+
+          }
+          
+        });
+      }
     }
-
-  })
-};
-
+  });
+}
 
 
 
-// const url = "/pats/get/ajax/mapData/"
-
-// const getData = (account_searched)=> {
-//   $.ajax({
-//     type: 'GET',
-//     url: url,
-//     data: {"account_searched": account_searched},
-//     complete: myCallback,
-//   });
-// };
-
-// function myCallback(response) {
-//   // Get the response data
-//   const data = response.responseText;
-
-//   // Update the "result" element with the response data
-//   $(".result").html(data);
-
-//   alert("Load was performed.");
-//   //const parsedData = JSON.parse(data);
-
-//   console.log(data);
-// }
   
 });
