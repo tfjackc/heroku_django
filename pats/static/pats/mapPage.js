@@ -198,12 +198,7 @@ function propResults(results) {
 
         //console.log(mtLayer); // check if mtLayer is defined and accessible
         mtLayer.queryFeatures(mtQuery).then(function(mtResults) {
-          // do something with the mtResults here
-          console.log(mtResults.features);
-          console.log(mtResults.geometryType);
-          console.log(mtResults.fields);
-          // getting valid returns from console log, can it zoom to fullExtent?
-          //view.extent = mtResults.features.fullExtent;
+          
           if (mtResults.features.length > 0) {
             const mtFeature = mtResults.features[0];
             const mtFeatureExtent = mtResults.features[0].geometry.extent;
