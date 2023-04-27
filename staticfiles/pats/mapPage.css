@@ -73,37 +73,21 @@ body,
   margin-left: 20px;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  height: 60px;
-  width: 100%;
+ .btn-info {
+  background-color: rgba(0, 123, 255, 0.5);
 }
 
-.sublayers {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
+
+.col, #searchWidget{
+  margin: 20px;
 }
 
-.sublayers-item {
-  flex-grow: 4;
-  background-color: rgba(34, 111, 14, 0.5);
-  color: #fff;
-  margin: 1px;
-  width: 50%;
-  padding: 20px;
-  overflow: auto;
-  text-align: center;
-  cursor: pointer;
-  font-size: 0.9em;
+#checkboxdiv {
+  margin:20px;
 }
 
-.visible-layer {
-  color: #fff;
-  background-color: #226f0e;
-}
+.row {
+  padding-left: 10px;
+  padding-right: 10px;
+} 
 

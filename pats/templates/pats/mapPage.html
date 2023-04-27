@@ -11,32 +11,42 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.26/"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'pats/mapPage.js' %}"></script>
+    <script src="{% static 'pats/mapPageV2.js' %}"></script>
     <title>Crook County Property</title>
   </head>
   <body>
     <div class="panel-container">
+      
       <div class="panel-side">
         <div>
-          <h2>Account Search</h2>
-          <input type='text' id='account_entered' placeholder='e.g., 1001'></input>
+          <h2>Property Search</h2>
+          <!-- <input type='text' id='account_entered' placeholder='e.g., 1001'></input>
           <button class="esri-widget" id="searchButton">Search!</button>
           <br />
-          <br />
+          <br /> -->
         </div>
-        
+        <div id="searchWidget"></div>
         <div id="checkboxdiv">
           <input type="checkbox" id="checkBoxLayer" checked />
           <label for="checkBoxLayer">Land Group Layer Visibility</label>
         </div>
-        <div id="paneDiv" class="esri-widget"></div>
-        <div class="sublayers esri-widget">
-            <input type="button" class="sublayers-item" data-id="0" value="Subdivisions">
-            <input type="button" class="sublayers-item" data-id="1" value="Taxlots">
-            <input type="button" class="sublayers-item" data-id="7" value="Pending">
+        <!-- <div id="paneDiv" class="esri-widget"></div> -->
+        <div class="sublayers esri-widget" style="background-color: transparent">
+          <div class="col">
+            <div class="row">
+            <input type="button" class="sublayers-item btn btn-info" data-id="0" value="Subdivisions">
+          </div>
+          <div class="row">
+            <input type="button" class="sublayers-item btn btn-info" data-id="1" value="Taxlots">
+          </div>
+          <div class="row">
+            <input type="button" class="sublayers-item btn btn-info" data-id="7" value="Pending">
+          </div>
+          </div>
         </div>
         
       </div>
+     
       <div id="viewDiv"></div>
     
     </div>

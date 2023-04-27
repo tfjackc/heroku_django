@@ -73,5 +73,21 @@ body,
   margin-left: 20px;
 }
 
+ .btn-info {
+  background-color: rgba(0, 123, 255, 0.5);
+}
 
+
+.col, #searchWidget{
+  margin: 20px;
+}
+
+#checkboxdiv {
+  margin:20px;
+}
+
+.row {
+  padding-left: 10px;
+  padding-right: 10px;
+} 
 

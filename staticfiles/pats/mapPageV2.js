@@ -37,31 +37,16 @@ const view = new MapView({
       visible: true,
       popupTemplate: {
         title: "Subdivision: {name}"
-    }, labelsVisible: true,
-    // labelingInfo autocasts to an array of LabelClass objects
-    labelingInfo: [{
-      labelExpression: "name",
-      labelPlacement: "always-horizontal",
-      symbol: {
-        type: "text",  // autocasts as new TextSymbol()
-        color: [0, 0, 0, 1.0],
-        haloColor: [0, 0, 0, 0.85],
-        haloSize: 1,
-        font: {
-          size: 16
-        }
       },
-      //minScale: 2400000,
-      //maxScale: 73000,
-    }]},
-    {
+     },
+     {
       id: 1,
       visible: true,
       popupTemplate: {
         title: "{MAPTAXLOT}",
         content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br /> Account: {ACCOUNT}",
     }
-  },
+    },
     // {
     //   id: 2,
     //   visible: false,
@@ -97,6 +82,7 @@ const view = new MapView({
 
   const searchWidget = new Search({
     view: view,
+    container: "searchWidget",
     allPlaceholder: "Maptaxlot, Account, or Situs Address",
     includeDefaultSources: false, 
     sources: [
@@ -126,10 +112,12 @@ const view = new MapView({
   });
   // Adds the search widget below other elements in
   // the top left corner of the view
-  view.ui.add(searchWidget, {
-    position: "top-left",
-    index: 2
-  });
+  
+  
+//   view.ui.add(searchWidget, {
+//     position: "top-left",
+//     index: 2
+//   });
 
   map.add(landGroup);
   map.add(prop);
@@ -198,88 +186,74 @@ const view = new MapView({
     }
   });
 
-//var account_searched = document.getElementById("account_entered");
-//var submitButton = document.getElementById("searchButton");
-//var searchWidgetInput = document.getElementById("187c1208b86-widget-3-input");
 
-searchWidget.on("select-result", function(event) {
-
-//const searchValue = event.results[0].value;
-//console.log(searchValue);
- console.log(event)
-//earchWidgetInput.addEventListener("keyup", (event) => {
-//submitButton.addEventListener("click", function() {
-  console.log("button clicks");
-  //console.log(searchValue)
-
-  tableWhere = "account_id = '" + event + "'"
-  //tableWhere = "account_id = '" + account_searched.value + "'"
-  //tableWhere="1=1"
-  console.log(tableWhere);
-
-  const tableQuery = new Query({
-    where: tableWhere,
-    returnGeometry: false,
-    outFields: ["*"]
-    });
-   
-    prop.when(function() {
-      return prop.queryFeatures(tableQuery);
-    }).then(propResults)
-});
-
-var account_list;
-account_list = [];
-
- 
-function propResults(results) {
-  console.log("Query returned " + results.features.length + " features");
+  searchWidget.on("select-result", function(event) {
   
-  let mt_whereClause;
+    if (event) {
+      for (const [key, value] of Object.entries(event.result)) {
+        console.log(`${key}: ${value}`);
 
-  results.features.forEach(function(feature) {
+        if (`${key}` == 'name') {
+            const maptaxlot = `${value}`
+            //const strip_mt = maptaxlot.split("-").slice(0, 2).join("");
+            //const taxlotValue = [];
+            //taxlotValue.push(strip_mt);
+            //console.log(taxlotValue);
     
-    for (const [key, value] of Object.entries(feature.attributes)) {
-
-      if (`${key}` == 'map_taxlot') {
-        const maptaxlot = `${value}`
-        const strip_mt = maptaxlot.split("-").slice(0, 2).join("");
-        //const taxlotValue = [];
-        //taxlotValue.push(strip_mt);
-        //console.log(taxlotValue);
-
-        mt_whereClause = "MAPTAXLOT = '" + strip_mt + "'";
-        console.log(mt_whereClause);
-        //let mtLayer = landGroup.sublayers.getItemAt(1);
-
-        const mtQuery = new Query({
-          where: mt_whereClause,
-          returnGeometry: true,
-          outFields: ["*"]
-        });
-
-        //console.log(mtLayer); // check if mtLayer is defined and accessible
-        mtLayer.queryFeatures(mtQuery).then(function(mtResults) {
-          
-          if (mtResults.features.length > 0) {
-            const mtFeature = mtResults.features[0];
-            const mtFeatureExtent = mtResults.features[0].geometry.extent;
-            view.goTo({ extent: mtFeatureExtent }).then(function() {
-              view.popup.open({
-                features: [mtFeature],
-                location: mtFeature.geometry.centroid
+            mt_whereClause = "MAPTAXLOT = '" + maptaxlot + "'";
+            console.log(mt_whereClause);
+            //let mtLayer = landGroup.sublayers.getItemAt(1);
+    
+            const mtQuery = new Query({
+              where: mt_whereClause,
+              returnGeometry: true,
+              outFields: ["*"]
             });
-          });
+    
+            //console.log(mtLayer); // check if mtLayer is defined and accessible
+            mtLayer.queryFeatures(mtQuery).then(function(mtResults) {
+              
+              if (mtResults.features.length > 0) {
+                const mtFeature = mtResults.features[0];
+                const mtFeatureExtent = mtResults.features[0].geometry.extent;
+                //console.log(mtFeature+' : '+mtFeatureExtent)
+            //     view.goTo({ extent: mtFeatureExtent }).then(function() {
+            //     //   view.popup.open({
+            //     //     features: [mtFeature],
+            //     //     location: mtFeature.geometry.centroid
+            //     // });
+            //   });
+                for (const [key, value] of Object.entries(mtResults.features[0].attributes)) {
+                    //console.log(`${key}: ${value}`);
+                    if (`${key}` == 'ACCOUNT') {
+                        tableWhere = "account_id = '" + `${value}` + "'"
+                        //tableWhere = "account_id = '" + account_searched.value + "'"
+                        //tableWhere="1=1"
+                        console.log(tableWhere);
 
+                        const tableQuery = new Query({
+                            where: tableWhere,
+                            returnGeometry: false,
+                            outFields: ["*"]
+                            });
+                        
+                            prop.when(function() {
+                            return prop.queryFeatures(tableQuery);
+                            }).then(propResults)
+                    }
+                }
+              }
+              
+            });
           }
-          
-        });
       }
+    } 
+
+    function propResults(results) {
+        console.log("Query returned " + results.features.length + " features");
+        console.log(results.features[0].attributes)
     }
-  });
-}
-
-
-
   
+  });
+    
 });

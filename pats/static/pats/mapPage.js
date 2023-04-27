@@ -4,6 +4,7 @@ require(["esri/Map",
          "esri/layers/MapImageLayer",
          "esri/widgets/Legend",
          "esri/rest/support/Query",
+         "esri/widgets/Search",
 ],
 
          (Map,
@@ -11,7 +12,8 @@ require(["esri/Map",
           FeatureLayer,
           MapImageLayer,
           Legend,
-          Query) => {
+          Query,
+          Search) => {
 
 const map = new Map({
   basemap: "topo-vector"
@@ -35,7 +37,23 @@ const view = new MapView({
       visible: true,
       popupTemplate: {
         title: "Subdivision: {name}"
-    }},
+    }, labelsVisible: true,
+    // labelingInfo autocasts to an array of LabelClass objects
+    labelingInfo: [{
+      labelExpression: "name",
+      labelPlacement: "always-horizontal",
+      symbol: {
+        type: "text",  // autocasts as new TextSymbol()
+        color: [0, 0, 0, 1.0],
+        haloColor: [0, 0, 0, 0.85],
+        haloSize: 1,
+        font: {
+          size: 16
+        }
+      },
+      //minScale: 2400000,
+      //maxScale: 73000,
+    }]},
     {
       id: 1,
       visible: true,
@@ -43,7 +61,7 @@ const view = new MapView({
         title: "{MAPTAXLOT}",
         content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br /> Account: {ACCOUNT}",
     }
-    },
+  },
     // {
     //   id: 2,
     //   visible: false,
@@ -76,6 +94,42 @@ const view = new MapView({
     url: "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0",
     //outFields: ["*"]
   })
+
+  const searchWidget = new Search({
+    view: view,
+    allPlaceholder: "Maptaxlot, Account, or Situs Address",
+    includeDefaultSources: false, 
+    sources: [
+      {
+        layer: mtLayer,
+        searchFields: ["MAPTAXLOT"],
+        suggestionTemplate: "{MAPTAXLOT}",
+        //displayField: "MAPTAXLTOT",
+        exactMatch: false,
+        outFields: ["*"],
+        name: "Maptaxlot",
+        placeholder: "Search Maptaxlot",
+      },
+      {
+        layer: mtLayer,
+        searchFields: ["ACCOUNT"],
+        suggestionTemplate: "{ACCOUNT}",
+        exactMatch: false,
+        outFields: ["*"],
+        //placeholder: "Account: Casey",
+        name: "Account ID",
+        placeholder: "Search by Account #",
+        //zoomScale: 500000,
+      },
+     
+    ]
+  });
+  // Adds the search widget below other elements in
+  // the top left corner of the view
+  view.ui.add(searchWidget, {
+    position: "top-left",
+    index: 2
+  });
 
   map.add(landGroup);
   map.add(prop);
@@ -144,14 +198,22 @@ const view = new MapView({
     }
   });
 
-var account_searched = document.getElementById("account_entered");
-var submitButton = document.getElementById("searchButton");
+//var account_searched = document.getElementById("account_entered");
+//var submitButton = document.getElementById("searchButton");
+//var searchWidgetInput = document.getElementById("187c1208b86-widget-3-input");
 
-submitButton.addEventListener("click", function() {
+searchWidget.on("select-result", function(event) {
+
+//const searchValue = event.results[0].value;
+//console.log(searchValue);
+ console.log(event)
+//earchWidgetInput.addEventListener("keyup", (event) => {
+//submitButton.addEventListener("click", function() {
   console.log("button clicks");
-  console.log(account_searched.value)
+  //console.log(searchValue)
 
-  tableWhere = "account_id = '" + account_searched.value + "'"
+  tableWhere = "account_id = '" + event + "'"
+  //tableWhere = "account_id = '" + account_searched.value + "'"
   //tableWhere="1=1"
   console.log(tableWhere);
 
