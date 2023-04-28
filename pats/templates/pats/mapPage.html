@@ -15,11 +15,104 @@
     <title>Crook County Property</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><h2>Crook County Property Information</h2></a>
+        <img src="{% static 'pats/crook_county_logo_lgr.jpg' %}" alt="" width="350" height="75" class="d-inline-block align-text-left">
+      </div>
+    </nav>
+    <div class="row" id="splitscreen">
+      <div class="col" id="tableinfo">
+        <div class="d-grid gap-2">
+          <button class="btn btn-secondary btn-lg shadow p-3 mt-5 mb-1 rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">
+            Account Information
+          </button>
+        </div>
+        <div class="collapse" id="collapse1">
+          <div class="card card-body gap-2">
+
+            <table class="table table-striped">
+              <tr>
+                <td class="table-dark col-4">Mailing Name</td>
+                <td><span id="owner-name"></span></td>
+              </tr>
+              <tr>
+                <td class="table-dark col-4">Map and Tax lot</td>
+                <td><span id="map-tax-lot"></span></td>
+              </tr>
+              <tr>
+                <td class="table-dark col-4">Situs Address</td>
+                <td class="table-light"><span id="situs-address"></span></td>
+              </tr>
+              <tr>
+              <td class="table-dark col-4">Tax Status</td>
+              <td class="table-light"><span id="tax-status"></span></td>
+            </tr>
+            </table>
+            
+          </div>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button class="btn btn-secondary btn-lg shadow p-3 mb-1 rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapseExample">
+            Real Market Values
+          </button>
+        </div>
+        <div class="collapse" id="collapse2">
+          <div class="card card-body gap-2">
+            <table class="table table-striped">
+              <tr>
+                <td class="table-dark col-4">Land</td>
+                <td class="table-light"><span id="land"></span></td>
+              </tr>
+              <tr>
+                <td class="table-dark col-4">Structures</td>
+                <td class="table-light"><span id="structures"></span></td>
+              </tr>
+              <tr>
+                <td class="table-dark col-4">Total</td>
+                <td class="table-light"><span id="total"></span></td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button class="btn btn-secondary btn-lg shadow p-3 mb-1 rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapseExample">
+            Assessed Values
+          </button>
+        </div>
+        <div class="collapse" id="collapse3">
+          <div class="card card-body gap-2">
+            <table class="table table-striped">
+              <tr>
+                <td class="table-dark col-4">Specially Assessed</td>
+                <td class="table-light"><span id="specially_assessed"></span></td>
+              </tr>
+              <tr>
+                <td class="table-dark col-4">Assessed Value</td>
+                <td class="table-light"><span id="assessed_value"></span></td>
+              </tr>
+              <tr>
+                <td class="table-dark col-4">Veterans Exemption</td>
+                <td class="table-light"><span id="vet_exception"></span></td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="col" id="mapframe">
     <div class="panel-container">
       
       <div class="panel-side">
-        <div>
-          <h2>Property Search</h2>
+        <div id="search header">
+          <h2>Search</h2>
+          <p style="font-size: small;margin-left: 20px;"><i>Enter in your account # or maptaxlot into the search bar</i></p>
           <!-- <input type='text' id='account_entered' placeholder='e.g., 1001'></input>
           <button class="esri-widget" id="searchButton">Search!</button>
           <br />
@@ -44,11 +137,12 @@
           </div>
           </div>
         </div>
-        
       </div>
-     
+
       <div id="viewDiv"></div>
-    
+
     </div>
+  </div>
+  </div>
   </body>
 </html>
