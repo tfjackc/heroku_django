@@ -5,6 +5,9 @@ require(["esri/Map",
          "esri/widgets/Legend",
          "esri/rest/support/Query",
          "esri/widgets/Search",
+         "esri/Basemap",
+         "esri/widgets/BasemapToggle",
+         "esri/request",
 ],
 
          (Map,
@@ -13,7 +16,12 @@ require(["esri/Map",
           MapImageLayer,
           Legend,
           Query,
-          Search) => {
+          Search,
+          Basemap,
+          BasemapToggle,
+          esriRequest) => {
+
+
 
 const map = new Map({
   basemap: "topo-vector"
@@ -28,6 +36,9 @@ const view = new MapView({
   zoom: 14,
   center: [long, lat] // longitude, latitude
   });
+
+
+
 
   // add feature from MapServer
   const landGroup = new MapImageLayer({
@@ -63,10 +74,10 @@ const view = new MapView({
     //   id: 5,
     //   visible: false,
     // },
-    // {
-    //   id: 6,
-    //   visible: false,
-    // },
+    {
+      id: 6,
+      visible: false,
+    },
     {
       id: 7,
       visible: true,
@@ -188,6 +199,10 @@ const view = new MapView({
 
 
   searchWidget.on("select-result", function(event) {
+
+    // view.goTo({
+    //   scale: 10000
+    // });
   
     if (event) {
       for (const [key, value] of Object.entries(event.result)) {
@@ -229,6 +244,9 @@ const view = new MapView({
                         tableWhere = "account_id = '" + `${value}` + "'"
                         //tableWhere = "account_id = '" + account_searched.value + "'"
                         //tableWhere="1=1"
+
+                        //getData(`${value}`)
+
                         console.log(tableWhere);
 
                         const tableQuery = new Query({
@@ -252,8 +270,40 @@ const view = new MapView({
     function propResults(results) {
         console.log("Query returned " + results.features.length + " features");
         console.log(results.features[0].attributes)
+
+        // account information
+        document.getElementById("owner-name").innerText = results.features[0].attributes.owner_name;
+        document.getElementById("map-tax-lot").innerText = results.features[0].attributes.map_taxlot;
+        document.getElementById("situs-address").innerText = results.features[0].attributes.situs_address;
+        document.getElementById("tax-status").innerText = results.features[0].attributes.tax_status;
+
+        // real market values
+        const land = parseInt(results.features[0].attributes.rmv_land);
+        const land_num = land.toLocaleString('en-US');
+        document.getElementById("land").innerText = '$'+land_num;
+        const improv = parseInt(results.features[0].attributes.rmv_improvements);
+        const improv_num = improv.toLocaleString('en-US');
+        document.getElementById("structures").innerText = '$'+improv_num;
+        const rmv_total = results.features[0].attributes.rmv_total;
+        const rmv_total_num = rmv_total.toLocaleString('en-US');
+        document.getElementById("total").innerText = '$'+rmv_total_num;
+
+        // assessed values
+        const spec = parseInt(results.features[0].attributes.maximum_av);
+        const spec_num = spec.toLocaleString('en-US');
+        document.getElementById("specially_assessed").innerText = '$'+spec_num;
+        const tax_av = results.features[0].attributes.taxable_av;
+        const tax_av_num = tax_av.toLocaleString('en-US');
+        document.getElementById("assessed_value").innerText = '$'+tax_av_num;
+        const vet = results.features[0].attributes.veterans_exemption;
+        const vet_num = vet.toLocaleString('en-US');
+        document.getElementById("vet_exception").innerText = '$'+vet_num;
+
     }
   
   });
-    
+
+
 });
+
+
