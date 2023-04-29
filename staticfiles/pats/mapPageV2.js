@@ -79,10 +79,7 @@ require(["esri/Map",
             ]
         });
 
-        const subdivisions = landGroup.sublayers.getItemAt(0);
-        const mtLayer = landGroup.sublayers.getItemAt(1);
-        const taxcode = landGroup.sublayers.getItemAt(6);
-        const pendingLayer = landGroup.sublayers.getItemAt(7);
+      
         
 
         const prop = new FeatureLayer({
@@ -90,24 +87,82 @@ require(["esri/Map",
             //outFields: ["*"]
         });
 
-        const transportation = new MapImageLayer({
-            url: "https://geo.co.crook.or.us/server/rest/services/publicApp/transInfrastructureGroup/MapServer/",
-            sublayers: [{
-              id: 0,
-              visible: true,
-              popupTemplate: {
-                  title: "Road: {full_add}"
-              },
-          },
-          {
-              id: 1,
-              visible: true,
-              popupTemplate: {
-                  title: "Road: {full_add}"
-              }
-          },
-            ]
+        // const transportation = new MapImageLayer({
+        //     url: "https://geo.co.crook.or.us/server/rest/services/publicApp/transInfrastructureGroup/MapServer/",
+        //     sublayers: [{
+        //       id: 0,
+        //       visible: true,
+        //       popupTemplate: {
+        //           title: "Road: {full_add}"
+        //       },
+        //   },
+        //   {
+        //       id: 1,
+        //       visible: true,
+        //       popupTemplate: {
+        //           title: "Road: {full_add}"
+        //       }
+        //   },
+        //     ]
+        // });
+
+        view.when(() => {
+          //map.add(transportation);
+          map.add(landGroup);
+          map.add(prop);
+      });
+
+      const subdivisions = landGroup.sublayers.getItemAt(0);
+      const mtLayer = landGroup.sublayers.getItemAt(1);
+      const taxcodeLayer = landGroup.sublayers.getItemAt(5);
+      const pendingLayer = landGroup.sublayers.getItemAt(6);
+
+      // transportation.when(() => {
+      //   console.log("should be visible");
+      // })
+
+      landGroup.when(() => {
+
+          console.log("Layer loaded successfully");
+          
+
+          var checkBoxLandGroup = document.getElementById("checkBoxLayer");
+         // var checkBoxRoads = document.getElementById("checkBoxRoads");
+          var checkBoxSubdivision = document.getElementById("subdivisions");
+          var checkBoxTaxlots = document.getElementById("taxlots");
+          var checkBoxTaxcodeLayer = document.getElementById("taxcodeLayer");
+          var checkBoxPendingLayer = document.getElementById("pendingLayer");
+      
+
+          checkBoxLandGroup.addEventListener("change", function(e) {
+            landGroup.visible = e.target.checked;
         });
+
+        // checkBoxRoads.addEventListener("change", function(e) {
+        //   transportation.visible = e.target.checked;
+        // });
+
+        checkBoxSubdivision.addEventListener("change", function(e) {         
+          subdivisions.visible = e.target.checked;
+        });
+
+        checkBoxTaxlots.addEventListener("change", function(e) {
+          mtLayer.visible = e.target.checked;
+        });
+
+        checkBoxTaxcodeLayer.addEventListener("change", function(e) {
+          taxcodeLayer.visible = e.target.checked;
+        });
+
+        checkBoxPendingLayer.addEventListener("change", function(e) {
+          pendingLayer.visible = e.target.checked;
+        });
+
+    
+        });
+      
+
+      
 
         const searchWidget = new Search({
             view: view,
@@ -147,68 +202,13 @@ require(["esri/Map",
         //     index: 2
         //   });
 
-        view.when(() => {
-            map.add(transportation);
-            map.add(landGroup);
-            map.add(prop);
-        });
-
-        // transportation.when(() => {
-        //   console.log("should be visible");
-        // })
-
-        // landGroup.when(() => {
-
-        //     console.log("Layer loaded successfully");
-        //     landGroup.sublayers.map((sublayer) => {
-        //         const id = sublayer.id;
-        //         const visible = sublayer.visible;
-        //         const node = document.querySelector(
-        //             ".sublayers-item[data-id='" + id + "']"
-        //         );
-        //         if (visible) {
-        //             node.classList.add("visible-layer");
-        //         }
-        //     });
-        // });
-
-        var checkBoxLandGroup = document.getElementById("checkBoxLayer");
-        var checkBoxRoads = document.getElementById("checkBoxRoads");
-        var checkBoxSubdivision = document.getElementById("subdivisions");
-        var checkBoxTaxlots = document.getElementById("taxlots");
-        var checkBoxPending = document.getElementById("pending");
-        var checkBoxTaxcodes = document.getElementById("taxcode");
+        
 
        
         
         
 
-        checkBoxLandGroup.addEventListener("change", function(e) {
-            landGroup.visible = e.target.checked;
-        });
-
-        checkBoxRoads.addEventListener("change", function(e) {
-          transportation.visible = e.target.checked;
-        });
-
-        checkBoxSubdivision.addEventListener("change", function(e) {         
-          subdivisions.visible = e.target.checked;
-        });
-
-        checkBoxTaxlots.addEventListener("change", function(e) {
-          mtLayer.visible = e.target.checked;
-        });
-
-        checkBoxPending.addEventListener("change", function(e) {
-          pendingLayer.visible = e.target.checked;
-          console.log('change pending')
-        });
-
-        checkBoxTaxcodes.addEventListener("change", function(e) {
-          
-          taxcode.visible = e.target.checked;
-          console.log("taxcodes should be showing")
-        });
+        
 
 
 
