@@ -55,35 +55,22 @@ require(["esri/Map",
                     }
                 },
                 {
-                  id: 3,
-                  visible: false
-                },
-                {
-                  id: 4,
-                  visible: false
-                },
-                {
-                  id: 5,
-                  visible: false
-                },
-                {
                     id: 6,
                     visible: false,
-                    opacity: 0.6
+                    opacity: 0.6,
                 },
                 {
                     id: 7,
                     visible: true,
-                    opacity: 0.5
-                }
+                    opacity: 0.5,
+                },
             ]
         });
 
-        const subdivisions = landGroup.sublayers.getItemAt(0);
         const mtLayer = landGroup.sublayers.getItemAt(1);
-        const taxcode = landGroup.sublayers.getItemAt(6);
-        const pendingLayer = landGroup.sublayers.getItemAt(7);
-        
+        const taxcodes = landGroup.sublayers.getItemAt(6);
+        const pending = landGroup.sublayers.getItemAt(7);
+        const subdivisions = landGroup.sublayers.getItemAt(0);
 
         const prop = new FeatureLayer({
             url: "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0",
@@ -188,7 +175,7 @@ require(["esri/Map",
         });
 
         checkBoxRoads.addEventListener("change", function(e) {
-          transportation.visible = e.target.checked;
+            transportation.visible = e.target.checked;
         });
 
         checkBoxSubdivision.addEventListener("change", function(e) {         
@@ -196,17 +183,19 @@ require(["esri/Map",
         });
 
         checkBoxTaxlots.addEventListener("change", function(e) {
-          mtLayer.visible = e.target.checked;
+          taxlots.visible = e.target.checked;
         });
 
         checkBoxPending.addEventListener("change", function(e) {
-          pendingLayer.visible = e.target.checked;
+          
+          
+          pending.visible = e.target.checked;
           console.log('change pending')
         });
 
         checkBoxTaxcodes.addEventListener("change", function(e) {
           
-          taxcode.visible = e.target.checked;
+          taxcodes.visible = e.target.checked;
           console.log("taxcodes should be showing")
         });
 

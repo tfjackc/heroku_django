@@ -109,7 +109,7 @@
       <div class="col" id="mapframe">
     <div class="panel-container">
       
-      <div class="panel-side">
+      <div class="panel-side shadow p-3 mb-1 rounded">
         <div id="search header">
           <h2>Search</h2>
           <p style="font-size: small;margin-left: 20px;"><i>Enter in your account # or maptaxlot into the search bar</i></p>
@@ -123,25 +123,35 @@
           <input type="checkbox" id="checkBoxLayer" checked />
           <label for="checkBoxLayer">Land Group Layer Visibility</label>
         </div>
+        <!-- <div id="checkboxdiv">
+          <input type="checkbox" id="checkBoxRoads" checked />
+          <label for="checkBoxRoads">Roads</label>
+        </div> -->
         <!-- <div id="paneDiv" class="esri-widget"></div> -->
-        <div class="sublayers esri-widget" style="background-color: transparent">
-          <div class="col">
-            <div class="row">
-            <input type="button" class="sublayers-item btn btn-info" data-id="0" value="Subdivisions">
-          </div>
-          <div class="row">
-            <input type="button" class="sublayers-item btn btn-info" data-id="1" value="Taxlots">
-          </div>
-          <div class="row">
-            <input type="button" class="sublayers-item btn btn-info" data-id="7" value="Pending">
-          </div>
-          </div>
+        <div id="checkboxdiv">
+          <input type="checkbox" id="taxlots" checked />
+          <label for="taxlots">Taxlots</label>
         </div>
+        <div id="checkboxdiv">
+          <input type="checkbox" id="pendingLayer" checked />
+          <label for="pendingLayer">Pending</label>
+        </div>
+          
+        <div id="checkboxdiv">
+          <input type="checkbox" id="subdivisions" />
+          <label for="subdivisions">Subdivisions</label>
+        </div>
+        
+        <div id="checkboxdiv">
+          <input type="checkbox" id="taxcodeLayer" />
+          <label for="taxcodeLayer">Taxcodes</label>
+        </div>
+        
+       
       </div>
-
       <div id="viewDiv"></div>
 
-    </div>
+    
   </div>
   </div>
   </body>
