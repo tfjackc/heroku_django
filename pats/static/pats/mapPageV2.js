@@ -107,6 +107,60 @@ require(["esri/Map",
             ]
         });
 
+        const districtsGroup = new MapImageLayer({
+            url: "https://geo.co.crook.or.us/server/rest/services/publicApp/districtsGroup/MapServer",
+            sublayers: [
+                {
+                  id: 12,
+                  visible: false
+                }, {
+                  id: 0,
+                  visible: false
+                }, {
+                  id: 1,
+                  visible: false
+                }, {
+                  id: 2,
+                  visible: false
+                }, {
+                    id: 3,
+                    visible: false
+                  },
+                  {
+                    id: 4,
+                    visible: false
+                  },
+                  {
+                    id: 5,
+                    visible: false
+                  },
+                  {
+                    id: 6,
+                    visible: false
+                  },
+                  {
+                    id: 7,
+                    visible: false
+                  },
+                  {
+                    id: 8,
+                    visible: false
+                  },
+                  {
+                    id: 9,
+                    visible: false
+                  },
+                  {
+                    id: 10,
+                    visible: false
+                  },
+                  {
+                    id: 11,
+                    visible: false
+                  }
+              ]
+        });
+
       
         
 
@@ -137,12 +191,13 @@ require(["esri/Map",
         view.when(() => {
           //map.add(transportation);
           map.add(landGroup);
+          map.add(districtsGroup);
           map.add(prop);
       });
 
       const subdivisions = landGroup.sublayers.getItemAt(0);
       const mtLayer = landGroup.sublayers.getItemAt(1);
-      const taxcodeLayer = landGroup.sublayers.getItemAt(5);
+      //const taxcodeLayer = landGroup.sublayers.getItemAt(5);
       const pendingLayer = landGroup.sublayers.getItemAt(6);
 
       // transportation.when(() => {
@@ -158,7 +213,7 @@ require(["esri/Map",
          // var checkBoxRoads = document.getElementById("checkBoxRoads");
           var checkBoxSubdivision = document.getElementById("subdivisions");
           var checkBoxTaxlots = document.getElementById("taxlots");
-          var checkBoxTaxcodeLayer = document.getElementById("taxcodeLayer");
+          
           var checkBoxPendingLayer = document.getElementById("pendingLayer");
       
 
@@ -178,18 +233,25 @@ require(["esri/Map",
           mtLayer.visible = e.target.checked;
         });
 
-        checkBoxTaxcodeLayer.addEventListener("change", function(e) {
-          taxcodeLayer.visible = e.target.checked;
-        });
-
         checkBoxPendingLayer.addEventListener("change", function(e) {
           pendingLayer.visible = e.target.checked;
         });
 
-        
-
     
         });
+
+    districtsGroup.when(() => {
+
+        console.log("districts should be loaded");
+        
+        var checkBoxDistrictsLayer = document.getElementById("districtsLayer");
+
+        checkBoxDistrictsLayer.addEventListener("change", function(e) {
+            console.log("clicking heard");
+            districtsGroup.visible = e.target.checked;
+            console.log(districtsGroup.visible);
+          });
+    });
       
         // view.popup.watch("visible", function (popUpStatusChange) {
         //     if (popUpStatusChange == true) {
