@@ -111,53 +111,58 @@ require(["esri/Map",
             url: "https://geo.co.crook.or.us/server/rest/services/publicApp/districtsGroup/MapServer",
             sublayers: [{
                     id: 12,
-                    visible: false
-                }, {
+                    visible: true,
+                    opacity: 0.6
+                }, 
+                {
                     id: 0,
                     visible: false
-                }, {
+                }, 
+                {
                     id: 1,
-                    visible: false
-                }, {
+                    visible: true
+                }, 
+                {
                     id: 2,
-                    visible: false
-                }, {
+                    visible: true
+                }, 
+                {
                     id: 3,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 4,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 5,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 6,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 7,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 8,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 9,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 10,
-                    visible: false
+                    visible: true
                 },
                 {
                     id: 11,
-                    visible: false
+                    visible: true
                 }
-            ]
+            ],
         });
 
 
@@ -178,6 +183,8 @@ require(["esri/Map",
         });
 
         districtsGroup.when(() => {
+
+            districtsGroup.visible = false;
 
             console.log("districts should be loaded");
 
