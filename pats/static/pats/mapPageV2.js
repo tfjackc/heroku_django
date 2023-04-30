@@ -5,9 +5,7 @@ require(["esri/Map",
         "esri/widgets/Legend",
         "esri/rest/support/Query",
         "esri/widgets/Search",
-        "esri/Basemap",
-        "esri/widgets/BasemapToggle",
-        "esri/Graphic"
+        "esri/widgets/Legend"
     ],
 
     (Map,
@@ -16,8 +14,7 @@ require(["esri/Map",
         MapImageLayer,
         Legend,
         Query,
-        Search,
-        Graphic) => {
+        Search) => {
 
 
 
@@ -35,6 +32,16 @@ require(["esri/Map",
             center: [long, lat] // longitude, latitude
         });
 
+        const subdivisionRenderer = {
+            type: "simple", // autocasts as new SimpleRenderer()
+            symbol: {
+              type: "simple-fill", // autocasts as new SimpleFillSymbol()
+              style: "none",
+              outline: { color: [165, 19, 200, 1] },
+              color: [245, 208, 253, 0.5]
+            },
+            label: "Subdivisions"
+          };
 
 
 
@@ -43,17 +50,36 @@ require(["esri/Map",
             url: "https://geo.co.crook.or.us/server/rest/services/publicApp/landGroup/MapServer",
             sublayers: [{
                     id: 0,
+                    renderer: subdivisionRenderer,
                     visible: false,
+                    labelingInfo: [
+                        {
+                          labelExpression: "[name]",
+                          labelPlacement: "always-horizontal",
+                          symbol: {
+                            type: "text", // autocasts as new TextSymbol()
+                            color: [255, 255, 255, 0.7],
+                            haloColor: [0, 0, 0, 0.7],
+                            haloSize: 1,
+                            font: {
+                              size: 18
+                            }
+                          },
+                        //   minScale: 2400000,
+                        //   maxScale: 73000
+                        }
+                      ],
                     popupTemplate: {
                         title: "Subdivision: {name}"
                     },
+                    
                 },
                 {
                     id: 1,
                     visible: true,
                     popupTemplate: {
                         title: "{MAPTAXLOT}",
-                        content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br /> Account: {ACCOUNT}" ,
+                        content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br /> Account: {ACCOUNT} <br /> PATS Link: <a href={PATS_LINK}>PATS Link</a> <br /> Tax Map Link: <a href={TAX_MAP_LINK}>Tax Map Link</a> <br /> Tax Card Link: <a href={TAX_CARD_LINK}>Tax Card Link</a>",
                     }
                 },
                 {
@@ -240,7 +266,7 @@ require(["esri/Map",
         const searchWidget = new Search({
             view: view,
             container: "searchWidget",
-            allPlaceholder: "Maptaxlot, Account, or Situs Address",
+            allPlaceholder: "Maptaxlot, Account, Situs Address, or Owner Name",
             includeDefaultSources: false,
             sources: [{
                     layer: mtLayer,
@@ -250,7 +276,7 @@ require(["esri/Map",
                     exactMatch: false,
                     outFields: ["*"],
                     name: "Maptaxlot",
-                    placeholder: "Search Maptaxlot",
+                    placeholder: "Search Map Taxlot...",
                 },
                 {
                     layer: mtLayer,
@@ -260,7 +286,29 @@ require(["esri/Map",
                     outFields: ["*"],
                     //placeholder: "Account: Casey",
                     name: "Account ID",
-                    placeholder: "Search by Account #",
+                    placeholder: "Search by Account #...",
+                    //zoomScale: 500000,
+                },
+                {
+                    layer: mtLayer,
+                    searchFields: ["SITUS_ADDRESS"],
+                    suggestionTemplate: "{SITUS_ADDRESS}",
+                    exactMatch: false,
+                    outFields: ["*"],
+                    //placeholder: "Account: Casey",
+                    name: "Situs Address",
+                    placeholder: "Search Situs Address...",
+                    //zoomScale: 500000,
+                },
+                {
+                    layer: mtLayer,
+                    searchFields: ["OWNER_NAME"],
+                    suggestionTemplate: "{OWNER_NAME}",
+                    exactMatch: false,
+                    outFields: ["*"],
+                    //placeholder: "Account: Casey",
+                    name: "Owner Name",
+                    placeholder: "e.g., SMITH JOHN",
                     //zoomScale: 500000,
                 },
 
@@ -361,7 +409,12 @@ require(["esri/Map",
 
             }
 
-           
+            
+            let legend = new Legend({
+                view: view,
+                container: "legend"
+              });
+              
 
 
     });
