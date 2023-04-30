@@ -181,6 +181,31 @@ require(["esri/Map",
         //     }
         //  });
 
+        function queryPropTable(results) {
+            for ([key, value] of Object.entries(results.features[0].attributes)) {
+                //console.log(`${key}: ${value}`);
+                if (`${key}` == 'ACCOUNT') {
+                    tableWhere = "account_id = '" + `${value}` + "'"
+                    //tableWhere = "account_id = '" + account_searched.value + "'"
+                    //tableWhere="1=1"
+
+                    //getData(`${value}`)
+
+                    //console.log(tableWhere);
+
+                    const tableQuery = new Query({
+                        where: tableWhere,
+                        returnGeometry: false,
+                        outFields: ["*"]
+                    });
+
+                    prop.when(function() {
+                        return prop.queryFeatures(tableQuery);
+                    }).then(propResults)
+                }
+            }
+        }
+
       
         view.on("click", function(evt){
             // console.log("latitude  = " + evt.mapPoint.latitude);
@@ -196,11 +221,14 @@ require(["esri/Map",
                 mtLayer.queryFeatures(query).then(function(results){
     
                     var features = results.features;
+
+                    queryPropTable(results);
+
                     for(var i = 0; i < features.length; i++){
                         console.log(features[i].attributes);
                         var queryReturn = features[i].attributes;
                         console.log(typeof(queryReturn));
-                        populateTables(queryReturn);
+                        //queryPropTable(queryReturn);
                             
                     }
                     
@@ -286,34 +314,18 @@ require(["esri/Map",
                                 //     //     location: mtFeature.geometry.centroid
                                 //     // });
                                 //   });
-                                for ([key, value] of Object.entries(mtResults.features[0].attributes)) {
-                                    //console.log(`${key}: ${value}`);
-                                    if (`${key}` == 'ACCOUNT') {
-                                        tableWhere = "account_id = '" + `${value}` + "'"
-                                        //tableWhere = "account_id = '" + account_searched.value + "'"
-                                        //tableWhere="1=1"
-
-                                        //getData(`${value}`)
-
-                                        //console.log(tableWhere);
-
-                                        const tableQuery = new Query({
-                                            where: tableWhere,
-                                            returnGeometry: false,
-                                            outFields: ["*"]
-                                        });
-
-                                        prop.when(function() {
-                                            return prop.queryFeatures(tableQuery);
-                                        }).then(propResults)
-                                    }
-                                }
+                                console.log("mtResults: "+ mtResults);
+                                queryPropTable(mtResults);
+                                
                             }
 
                         });
                     }
                 }
             }
+        }
+
+            
 
             function propResults(results) {
                 //console.log("Query returned " + results.features.length + " features");
@@ -349,7 +361,7 @@ require(["esri/Map",
 
             }
 
-        };
+           
 
 
     });
