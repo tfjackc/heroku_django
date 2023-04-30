@@ -7,6 +7,7 @@ require(["esri/Map",
         "esri/widgets/Search",
         "esri/Basemap",
         "esri/widgets/BasemapToggle",
+        "esri/Graphic"
     ],
 
     (Map,
@@ -15,7 +16,8 @@ require(["esri/Map",
         MapImageLayer,
         Legend,
         Query,
-        Search) => {
+        Search,
+        Graphic) => {
 
 
 
@@ -51,7 +53,7 @@ require(["esri/Map",
                     visible: true,
                     popupTemplate: {
                         title: "{MAPTAXLOT}",
-                        content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br /> Account: {ACCOUNT}",
+                        content: "Owner Name: {OWNER_NAME} <br /> Zone: {ZONE} <br /> Account: {ACCOUNT}" ,
                     }
                 },
                 {
@@ -158,10 +160,53 @@ require(["esri/Map",
           pendingLayer.visible = e.target.checked;
         });
 
+        
+
     
         });
       
+        // view.popup.watch("visible", function (popUpStatusChange) {
+        //     if (popUpStatusChange == true) {
+        //       console.log("Pop-up watch has been fired")
+        //       console.log("Pop-up title is:", view.popup.title); //returns the pop up title
+        //       console.log("Pop-up content is:", view.popup.content); //returns the pop up content
 
+        //             // Extract the value of {ACCOUNT} from the content string
+        //     var regex = /Account:\s*(.*)/i; // Match the string "Account:" followed by any number of spaces and capture the rest of the string
+        //     var match = regex.exec(view.popup.content);
+        //     if (match) {
+        //     var accountValue = match[1]; // The captured value is stored in the first capture group
+        //     console.log("Account value is:", accountValue);
+        //     }
+        //     }
+        //  });
+
+      
+        view.on("click", function(evt){
+            // console.log("latitude  = " + evt.mapPoint.latitude);
+            // console.log("longitude = " + evt.mapPoint.longitude);
+            // Create a graphic and add the geometry and symbol to it
+            
+                var query = new Query();
+                query.geometry = evt.mapPoint;
+                //console.log(query.geometry);
+                query.outFields = ["*"];
+                query.returnGeometry = true;
+                query.spatialRelationship = "intersects";
+                mtLayer.queryFeatures(query).then(function(results){
+    
+                    var features = results.features;
+                    for(var i = 0; i < features.length; i++){
+                        console.log(features[i].attributes);
+                        var queryReturn = features[i].attributes;
+                        console.log(typeof(queryReturn));
+                        populateTables(queryReturn);
+                            
+                    }
+                    
+                 });
+        });
+       
       
 
         const searchWidget = new Search({
@@ -193,73 +238,23 @@ require(["esri/Map",
 
             ]
         });
-        // Adds the search widget below other elements in
-        // the top left corner of the view
-
-
-        //   view.ui.add(searchWidget, {
-        //     position: "top-left",
-        //     index: 2
-        //   });
-
-        
-
        
-        
-        
 
-        
-
-
-
-
-        // const legend = new Legend({
-        //     view: view,
-        //     layerInfos: [
-        //       {
-        //         layer: landGroup,
-        //         title: "Land Group",
-        //         sublayers: [
-        //           {
-        //             id: 0,
-        //             title: "Subdivisions",
-        //           },
-        //           {
-        //             id: 1,
-        //             title: "Taxlots",
-        //           },
-        //           {
-        //             id: 7,
-        //             title: "Pending",
-        //           },
-
-        //         ]
-        //       }
-        //     ]
-        //   });
-
-        //  view.ui.add(legend, "bottom-left");
-
-        // const sublayersElement = document.querySelector(".sublayers");
-        // sublayersElement.addEventListener("change", (event) => {
-        //   console.log("Change event listener is working");
-        //   const id = event.target.getAttribute("data-id");
-        //   if (id) {
-        //     const sublayer = landGroup.findSublayerById(parseInt(id));
-        //     sublayer.visible = event.target.checked;
-        //     console.log(`Sublayer ${sublayer.id} visibility: ${sublayer.visible}`);
-        //   }
-        // });
 
         searchWidget.on("select-result", function(event) {
+            populateTables(event);
+            console.log(event);
+            console.log(typeof(event));
+        });
 
             // view.goTo({
             //   scale: 10000
             // });
+        function populateTables(event) {
 
             if (event) {
                 for ([key, value] of Object.entries(event.result)) {
-                    console.log(`${key}: ${value}`);
+                    //console.log(`${key}: ${value}`);
 
                     if (`${key}` == 'name') {
                         const maptaxlot = `${value}`
@@ -269,7 +264,7 @@ require(["esri/Map",
                         //console.log(taxlotValue);
 
                         mt_whereClause = "MAPTAXLOT = '" + maptaxlot + "'";
-                        console.log(mt_whereClause);
+                       // console.log(mt_whereClause);
                         //let mtLayer = landGroup.sublayers.getItemAt(1);
 
                         const mtQuery = new Query({
@@ -300,7 +295,7 @@ require(["esri/Map",
 
                                         //getData(`${value}`)
 
-                                        console.log(tableWhere);
+                                        //console.log(tableWhere);
 
                                         const tableQuery = new Query({
                                             where: tableWhere,
@@ -321,8 +316,8 @@ require(["esri/Map",
             }
 
             function propResults(results) {
-                console.log("Query returned " + results.features.length + " features");
-                console.log(results.features[0].attributes)
+                //console.log("Query returned " + results.features.length + " features");
+                //console.log(results.features[0].attributes)
 
                 // account information
                 document.getElementById("owner-name").innerText = results.features[0].attributes.owner_name;
@@ -354,7 +349,7 @@ require(["esri/Map",
 
             }
 
-        });
+        };
 
 
     });
