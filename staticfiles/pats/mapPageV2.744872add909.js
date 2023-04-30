@@ -35,15 +35,13 @@ require(["esri/Map",
         const subdivisionRenderer = {
             type: "simple", // autocasts as new SimpleRenderer()
             symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                style: "none",
-                outline: {
-                    color: [165, 19, 200, 1]
-                },
-                color: [245, 208, 253, 0.5]
+              type: "simple-fill", // autocasts as new SimpleFillSymbol()
+              style: "none",
+              outline: { color: [165, 19, 200, 1] },
+              color: [245, 208, 253, 0.5]
             },
             label: "Subdivisions"
-        };
+          };
 
 
 
@@ -54,25 +52,27 @@ require(["esri/Map",
                     id: 0,
                     renderer: subdivisionRenderer,
                     visible: false,
-                    labelingInfo: [{
-                        labelExpression: "[name]",
-                        labelPlacement: "always-horizontal",
-                        symbol: {
+                    labelingInfo: [
+                        {
+                          labelExpression: "[name]",
+                          labelPlacement: "always-horizontal",
+                          symbol: {
                             type: "text", // autocasts as new TextSymbol()
                             color: [255, 255, 255, 0.7],
                             haloColor: [0, 0, 0, 0.7],
                             haloSize: 1,
                             font: {
-                                size: 18
+                              size: 18
                             }
-                        },
+                          },
                         //   minScale: 2400000,
                         //   maxScale: 73000
-                    }],
+                        }
+                      ],
                     popupTemplate: {
                         title: "Subdivision: {name}"
                     },
-
+                    
                 },
                 {
                     id: 1,
@@ -83,16 +83,16 @@ require(["esri/Map",
                     }
                 },
                 {
-                    id: 3,
-                    visible: false
+                  id: 3,
+                  visible: false
                 },
                 {
-                    id: 4,
-                    visible: false
+                  id: 4,
+                  visible: false
                 },
                 {
-                    id: 5,
-                    visible: false
+                  id: 5,
+                  visible: false
                 },
                 {
                     id: 6,
@@ -110,58 +110,57 @@ require(["esri/Map",
         const districtsGroup = new MapImageLayer({
             url: "https://geo.co.crook.or.us/server/rest/services/publicApp/districtsGroup/MapServer",
             sublayers: [{
-                    id: 12,
-                    visible: false
+                  id: 12,
+                  visible: false
                 }, {
-                    id: 0,
-                    visible: false
+                  id: 0,
+                  visible: false
                 }, {
-                    id: 1,
-                    visible: false
+                  id: 1,
+                  visible: false
                 }, {
-                    id: 2,
-                    visible: false
+                  id: 2,
+                  visible: false
                 }, {
                     id: 3,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 4,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 5,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 6,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 7,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 8,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 9,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 10,
                     visible: false
-                },
-                {
+                  },
+                  {
                     id: 11,
                     visible: false
-                }
-            ]
+                  }]
         });
 
-
-
+      
+        
 
         const prop = new FeatureLayer({
             url: "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0",
@@ -171,55 +170,55 @@ require(["esri/Map",
 
         view.when(() => {
 
-            map.add(landGroup);
-            map.add(districtsGroup);
-            map.add(prop);
+          map.add(landGroup);
+          map.add(districtsGroup);
+          map.add(prop);
 
+      });
+
+      districtsGroup.when(() => {
+
+        console.log("districts should be loaded");
+        
+        var checkBoxDistrictsLayer = document.getElementById("districtsLayer");
+
+        checkBoxDistrictsLayer.addEventListener("change", function(e) {
+            console.log("clicking heard");
+            districtsGroup.visible = e.target.checked;
+            console.log(districtsGroup.visible);
+          });
+    });
+
+      const subdivisions = landGroup.sublayers.getItemAt(0);
+      const mtLayer = landGroup.sublayers.getItemAt(1);
+      const pendingLayer = landGroup.sublayers.getItemAt(6);
+
+      landGroup.when(() => {
+
+          var checkBoxLandGroup = document.getElementById("checkBoxLayer");
+          var checkBoxSubdivision = document.getElementById("subdivisions");
+          var checkBoxTaxlots = document.getElementById("taxlots");
+          var checkBoxPendingLayer = document.getElementById("pendingLayer");
+      
+
+          checkBoxLandGroup.addEventListener("change", function(e) {
+            landGroup.visible = e.target.checked;
         });
 
-        districtsGroup.when(() => {
-
-            console.log("districts should be loaded");
-
-            var checkBoxDistrictsLayer = document.getElementById("districtsLayer");
-
-            checkBoxDistrictsLayer.addEventListener("change", function(e) {
-                console.log("clicking heard");
-                districtsGroup.visible = e.target.checked;
-                console.log(districtsGroup.visible);
-            });
+        checkBoxSubdivision.addEventListener("change", function(e) {         
+          subdivisions.visible = e.target.checked;
         });
 
-        const subdivisions = landGroup.sublayers.getItemAt(0);
-        const mtLayer = landGroup.sublayers.getItemAt(1);
-        const pendingLayer = landGroup.sublayers.getItemAt(6);
-
-        landGroup.when(() => {
-
-            var checkBoxLandGroup = document.getElementById("checkBoxLayer");
-            var checkBoxSubdivision = document.getElementById("subdivisions");
-            var checkBoxTaxlots = document.getElementById("taxlots");
-            var checkBoxPendingLayer = document.getElementById("pendingLayer");
-
-
-            checkBoxLandGroup.addEventListener("change", function(e) {
-                landGroup.visible = e.target.checked;
-            });
-
-            checkBoxSubdivision.addEventListener("change", function(e) {
-                subdivisions.visible = e.target.checked;
-            });
-
-            checkBoxTaxlots.addEventListener("change", function(e) {
-                mtLayer.visible = e.target.checked;
-            });
-
-            checkBoxPendingLayer.addEventListener("change", function(e) {
-                pendingLayer.visible = e.target.checked;
-            });
-
-
+        checkBoxTaxlots.addEventListener("change", function(e) {
+          mtLayer.visible = e.target.checked;
         });
+
+        checkBoxPendingLayer.addEventListener("change", function(e) {
+          pendingLayer.visible = e.target.checked;
+        });
+
+    
+    });
 
 
         function queryPropTable(results) {
@@ -247,23 +246,23 @@ require(["esri/Map",
             }
         }
 
+      
+        view.on("click", function(evt){
 
-        view.on("click", function(evt) {
+                var query = new Query();
+                query.geometry = evt.mapPoint;
 
-            var query = new Query();
-            query.geometry = evt.mapPoint;
+                query.outFields = ["*"];
+                query.returnGeometry = true;
+                query.spatialRelationship = "intersects";
+                mtLayer.queryFeatures(query).then(function(results){
+    
+                    queryPropTable(results);
 
-            query.outFields = ["*"];
-            query.returnGeometry = true;
-            query.spatialRelationship = "intersects";
-            mtLayer.queryFeatures(query).then(function(results) {
-
-                queryPropTable(results);
-
-            });
+                 });
         });
-
-
+       
+      
 
         const searchWidget = new Search({
             view: view,
@@ -316,14 +315,14 @@ require(["esri/Map",
 
             ]
         });
-
+       
 
 
         searchWidget.on("select-result", function(event) {
             populateTables(event);
         });
 
-
+           
         function populateTables(event) {
 
             if (event) {
@@ -346,10 +345,10 @@ require(["esri/Map",
                             if (mtResults.features.length > 0) {
                                 // const mtFeature = mtResults.features[0];
                                 // const mtFeatureExtent = mtResults.features[0].geometry.extent;
-
-                                console.log("mtResults: " + mtResults);
+           
+                                console.log("mtResults: "+ mtResults);
                                 queryPropTable(mtResults);
-
+                                
                             }
 
                         });
@@ -358,46 +357,46 @@ require(["esri/Map",
             }
         }
 
+            
 
+            function propResults(results) {
+  
+                // account information
+                document.getElementById("owner-name").innerText = results.features[0].attributes.owner_name;
+                document.getElementById("map-tax-lot").innerText = results.features[0].attributes.map_taxlot;
+                document.getElementById("situs-address").innerText = results.features[0].attributes.situs_address;
+                document.getElementById("tax-status").innerText = results.features[0].attributes.tax_status;
 
-        function propResults(results) {
+                // real market values
+                const land = parseInt(results.features[0].attributes.rmv_land);
+                const land_num = land.toLocaleString('en-US');
+                document.getElementById("land").innerText = '$' + land_num;
+                const improv = parseInt(results.features[0].attributes.rmv_improvements);
+                const improv_num = improv.toLocaleString('en-US');
+                document.getElementById("structures").innerText = '$' + improv_num;
+                const rmv_total = results.features[0].attributes.rmv_total;
+                const rmv_total_num = rmv_total.toLocaleString('en-US');
+                document.getElementById("total").innerText = '$' + rmv_total_num;
 
-            // account information
-            document.getElementById("owner-name").innerText = results.features[0].attributes.owner_name;
-            document.getElementById("map-tax-lot").innerText = results.features[0].attributes.map_taxlot;
-            document.getElementById("situs-address").innerText = results.features[0].attributes.situs_address;
-            document.getElementById("tax-status").innerText = results.features[0].attributes.tax_status;
+                // assessed values
+                const spec = parseInt(results.features[0].attributes.maximum_av);
+                const spec_num = spec.toLocaleString('en-US');
+                document.getElementById("specially_assessed").innerText = '$' + spec_num;
+                const tax_av = results.features[0].attributes.taxable_av;
+                const tax_av_num = tax_av.toLocaleString('en-US');
+                document.getElementById("assessed_value").innerText = '$' + tax_av_num;
+                const vet = results.features[0].attributes.veterans_exemption;
+                const vet_num = vet.toLocaleString('en-US');
+                document.getElementById("vet_exception").innerText = '$' + vet_num;
 
-            // real market values
-            const land = parseInt(results.features[0].attributes.rmv_land);
-            const land_num = land.toLocaleString('en-US');
-            document.getElementById("land").innerText = '$' + land_num;
-            const improv = parseInt(results.features[0].attributes.rmv_improvements);
-            const improv_num = improv.toLocaleString('en-US');
-            document.getElementById("structures").innerText = '$' + improv_num;
-            const rmv_total = results.features[0].attributes.rmv_total;
-            const rmv_total_num = rmv_total.toLocaleString('en-US');
-            document.getElementById("total").innerText = '$' + rmv_total_num;
+            }
 
-            // assessed values
-            const spec = parseInt(results.features[0].attributes.maximum_av);
-            const spec_num = spec.toLocaleString('en-US');
-            document.getElementById("specially_assessed").innerText = '$' + spec_num;
-            const tax_av = results.features[0].attributes.taxable_av;
-            const tax_av_num = tax_av.toLocaleString('en-US');
-            document.getElementById("assessed_value").innerText = '$' + tax_av_num;
-            const vet = results.features[0].attributes.veterans_exemption;
-            const vet_num = vet.toLocaleString('en-US');
-            document.getElementById("vet_exception").innerText = '$' + vet_num;
-
-        }
-
-
-        let legend = new Legend({
-            view: view,
-            container: "legend"
-        });
-
+            
+            let legend = new Legend({
+                view: view,
+                container: "legend"
+              });
+              
 
 
     });
