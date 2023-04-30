@@ -224,13 +224,13 @@ require(["esri/Map",
 
                     queryPropTable(results);
 
-                    for(var i = 0; i < features.length; i++){
-                        console.log(features[i].attributes);
-                        var queryReturn = features[i].attributes;
-                        console.log(typeof(queryReturn));
-                        //queryPropTable(queryReturn);
+                    // for(var i = 0; i < features.length; i++){
+                    //     console.log(features[i].attributes);
+                    //     var queryReturn = features[i].attributes;
+                    //     console.log(typeof(queryReturn));
+                    //     //queryPropTable(queryReturn);
                             
-                    }
+                    // }
                     
                  });
         });
