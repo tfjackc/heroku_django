@@ -2,16 +2,19 @@ require(["esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/layers/MapImageLayer",
+        "esri/widgets/Home",
         "esri/widgets/Legend",
         "esri/rest/support/Query",
         "esri/widgets/Search",
-        "esri/widgets/Legend"
+        "esri/widgets/Legend",
+        
     ],
 
     (Map,
         MapView,
         FeatureLayer,
         MapImageLayer,
+        Home,
         Legend,
         Query,
         Search) => {
@@ -31,6 +34,19 @@ require(["esri/Map",
             zoom: 14,
             center: [long, lat] // longitude, latitude
         });
+
+        let homeWidget = new Home({
+            view: view
+          });
+          
+          // adds the home widget to the top left corner of the MapView
+          view.ui.add(homeWidget, "top-left");
+
+        let legend = new Legend({
+            view: view,
+            container: "legend"
+        });
+        
 
         const subdivisionRenderer = {
             type: "simple", // autocasts as new SimpleRenderer()
@@ -52,23 +68,7 @@ require(["esri/Map",
             url: "https://geo.co.crook.or.us/server/rest/services/publicApp/landGroup/MapServer",
             sublayers: [{
                     id: 0,
-                    renderer: subdivisionRenderer,
                     visible: false,
-                    labelingInfo: [{
-                        labelExpression: "[name]",
-                        labelPlacement: "always-horizontal",
-                        symbol: {
-                            type: "text", // autocasts as new TextSymbol()
-                            color: [255, 255, 255, 0.7],
-                            haloColor: [0, 0, 0, 0.7],
-                            haloSize: 1,
-                            font: {
-                                size: 18
-                            }
-                        },
-                        //   minScale: 2400000,
-                        //   maxScale: 73000
-                    }],
                     popupTemplate: {
                         title: "Subdivision: {name}"
                     },
@@ -398,13 +398,5 @@ require(["esri/Map",
             document.getElementById("vet_exception").innerText = '$' + vet_num;
 
         }
-
-
-        let legend = new Legend({
-            view: view,
-            container: "legend"
-        });
-
-
 
     });
