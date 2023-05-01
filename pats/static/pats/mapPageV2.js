@@ -2,6 +2,9 @@ require(["esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/layers/MapImageLayer",
+        "esri/Basemap",
+        "esri/widgets/BasemapToggle",
+        "esri/widgets/BasemapGallery",
         "esri/widgets/Home",
         "esri/widgets/Legend",
         "esri/rest/support/Query",
@@ -14,16 +17,28 @@ require(["esri/Map",
         MapView,
         FeatureLayer,
         MapImageLayer,
+        Basemap,
+        BasemapToggle,
+        BasemapGallery,
         Home,
         Legend,
         Query,
         Search) => {
 
-
+        
 
         const map = new Map({
             basemap: "topo-vector"
         });
+
+        let basemap = new Basemap({
+            url: "https://geo.co.crook.or.us/server/rest/services/basemaps/Crook_County_Basemap_2/MapServer"
+            // portalItem: {
+            //     id: "9ec8202339c9427d95b506b85bcaf88b" //crook county basemap
+            // }
+        });
+
+        
 
         var lat = 44.30291;
         var long = -120.84585;
@@ -31,9 +46,23 @@ require(["esri/Map",
         const view = new MapView({
             container: "viewDiv",
             map: map,
-            zoom: 14,
+            zoom: 13,
             center: [long, lat] // longitude, latitude
         });
+
+        let basemapToggle = new BasemapToggle({
+            view: view,  // The view that provides access to the map's "streets-vector" basemap
+            nextBasemap: "hybrid"  // Allows for toggling to the "hybrid" basemap
+          });
+        // const basemapGallery = new BasemapGallery({
+        //     view: view,
+        //     source: { // autocasts to PortalBasemapsSource
+        //       portal: "https://geo.co.crook.or.us/portal/home/"
+        //     }
+        //  });
+
+          view.ui.add(basemapToggle, "top-left");
+
 
         let homeWidget = new Home({
             view: view
@@ -61,6 +90,20 @@ require(["esri/Map",
             label: "Subdivisions"
         };
 
+        const taxlotRenderer = {
+            type: "simple",
+            symbol: { 
+                type: "simple-fill", 
+                style: "none",
+                outline : {
+                    width: 0.5,
+                    color: [0, 0, 0, 1]
+                },
+                color: [0, 0, 0, 0.5]
+             },
+            label: "Taxlots"
+        };
+
 
 
         // add feature from MapServer
@@ -76,6 +119,7 @@ require(["esri/Map",
                 },
                 {
                     id: 1,
+                    renderer: taxlotRenderer,
                     visible: true,
                     popupTemplate: {
                         title: "{MAPTAXLOT}",
