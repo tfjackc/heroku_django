@@ -31,12 +31,12 @@ require(["esri/Map",
             basemap: "topo-vector"
         });
 
-        let basemap = new Basemap({
-            url: "https://geo.co.crook.or.us/server/rest/services/basemaps/Crook_County_Basemap_2/MapServer"
-            // portalItem: {
-            //     id: "9ec8202339c9427d95b506b85bcaf88b" //crook county basemap
-            // }
-        });
+        // let basemap = new Basemap({
+        //     url: "https://geo.co.crook.or.us/server/rest/services/basemaps/Crook_County_Basemap_2/MapServer"
+        //     // portalItem: {
+        //     //     id: "9ec8202339c9427d95b506b85bcaf88b" //crook county basemap
+        //     // }
+        // });
 
         
 
