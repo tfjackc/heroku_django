@@ -2,9 +2,7 @@ require(["esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/layers/MapImageLayer",
-        "esri/Basemap",
         "esri/widgets/BasemapToggle",
-        "esri/widgets/BasemapGallery",
         "esri/widgets/Home",
         "esri/widgets/Legend",
         "esri/rest/support/Query",
@@ -17,32 +15,22 @@ require(["esri/Map",
         MapView,
         FeatureLayer,
         MapImageLayer,
-        Basemap,
-        BasemapToggle,
-        BasemapGallery,
+        BasemapToggle, 
         Home,
         Legend,
         Query,
         Search) => {
 
         
-
+         //create map object   
         const map = new Map({
             basemap: "topo-vector"
         });
 
-        // let basemap = new Basemap({
-        //     url: "https://geo.co.crook.or.us/server/rest/services/basemaps/Crook_County_Basemap_2/MapServer"
-        //     // portalItem: {
-        //     //     id: "9ec8202339c9427d95b506b85bcaf88b" //crook county basemap
-        //     // }
-        // });
-
-        
-
         var lat = 44.30291;
         var long = -120.84585;
 
+        // create view
         const view = new MapView({
             container: "viewDiv",
             map: map,
@@ -51,19 +39,14 @@ require(["esri/Map",
         });
 
         let basemapToggle = new BasemapToggle({
-            view: view,  // The view that provides access to the map's "streets-vector" basemap
-            nextBasemap: "hybrid"  // Allows for toggling to the "hybrid" basemap
+            view: view,  
+            nextBasemap: "hybrid"  
           });
-        // const basemapGallery = new BasemapGallery({
-        //     view: view,
-        //     source: { // autocasts to PortalBasemapsSource
-        //       portal: "https://geo.co.crook.or.us/portal/home/"
-        //     }
-        //  });
-
+    
+          // add basemap toggle
           view.ui.add(basemapToggle, "top-left");
 
-
+          // return home button
         let homeWidget = new Home({
             view: view
           });
@@ -76,11 +59,11 @@ require(["esri/Map",
             container: "legend"
         });
         
-
+        // create renderder for subdivisions
         const subdivisionRenderer = {
-            type: "simple", // autocasts as new SimpleRenderer()
+            type: "simple", 
             symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                type: "simple-fill", 
                 style: "none",
                 outline: {
                     color: [165, 19, 200, 1]
@@ -90,6 +73,7 @@ require(["esri/Map",
             label: "Subdivisions"
         };
 
+        // create renderer for taxlots 
         const taxlotRenderer = {
             type: "simple",
             symbol: { 
@@ -111,6 +95,7 @@ require(["esri/Map",
             url: "https://geo.co.crook.or.us/server/rest/services/publicApp/landGroup/MapServer",
             sublayers: [{
                     id: 0,
+                    renderer: subdivisionRenderer,
                     visible: false,
                     popupTemplate: {
                         title: "Subdivision: {name}"
@@ -211,13 +196,13 @@ require(["esri/Map",
 
 
 
-
+        // add table to query based on selections
         const prop = new FeatureLayer({
             url: "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0",
             //outFields: ["*"]
         });
 
-
+        // load layers
         view.when(() => {
 
             map.add(landGroup);
@@ -229,15 +214,10 @@ require(["esri/Map",
         districtsGroup.when(() => {
 
             districtsGroup.visible = false;
-
-            console.log("districts should be loaded");
-
             var checkBoxDistrictsLayer = document.getElementById("districtsLayer");
 
             checkBoxDistrictsLayer.addEventListener("change", function(e) {
-                console.log("clicking heard");
                 districtsGroup.visible = e.target.checked;
-                console.log(districtsGroup.visible);
             });
         });
 
@@ -272,18 +252,12 @@ require(["esri/Map",
 
         });
 
-
+        // query the Property table
         function queryPropTable(results) {
             for ([key, value] of Object.entries(results.features[0].attributes)) {
                 //console.log(`${key}: ${value}`);
                 if (`${key}` == 'ACCOUNT') {
                     tableWhere = "account_id = '" + `${value}` + "'"
-                    //tableWhere = "account_id = '" + account_searched.value + "'"
-                    //tableWhere="1=1"
-
-                    //getData(`${value}`)
-
-                    //console.log(tableWhere);
 
                     const tableQuery = new Query({
                         where: tableWhere,
@@ -298,7 +272,7 @@ require(["esri/Map",
             }
         }
 
-
+        // when a tax lot is clicked, send the query to the queryPropTable function
         view.on("click", function(evt) {
 
             var query = new Query();
@@ -315,7 +289,7 @@ require(["esri/Map",
         });
 
 
-
+        // create search widget with search options
         const searchWidget = new Search({
             view: view,
             container: "searchWidget",
@@ -395,12 +369,7 @@ require(["esri/Map",
                         mtLayer.queryFeatures(mtQuery).then(function(mtResults) {
 
                             if (mtResults.features.length > 0) {
-                                // const mtFeature = mtResults.features[0];
-                                // const mtFeatureExtent = mtResults.features[0].geometry.extent;
-
-                                console.log("mtResults: " + mtResults);
                                 queryPropTable(mtResults);
-
                             }
 
                         });
