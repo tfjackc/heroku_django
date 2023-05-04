@@ -13,13 +13,13 @@
 {% leaflet_css %} 
 <link rel="stylesheet" href="{% static 'portfolio/portfoliomain.css' %}">
 <title>Page Title</title>
+{{map.header.render|safe}}
 </head>
 <body>
-
-
+    
     <!-- JavaScript for all things in the leaflet map -->
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
   
     function map_init_basic (map, options) {
     
@@ -39,12 +39,12 @@
     </script>
   
     
-    {% leaflet_map "map" callback="window.map_init_basic" %} 
+    {% leaflet_map "map" callback="window.map_init_basic" %}  -->
     
 
 
 
-</body>
+
 </html> 
 
 

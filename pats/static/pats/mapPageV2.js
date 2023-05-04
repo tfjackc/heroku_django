@@ -88,6 +88,15 @@ require(["esri/Map",
             label: "Taxlots"
         };
 
+        const fLayer = new FeatureLayer ({
+            url: "http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/1"
+        });
+
+        const fLayer2 = new FeatureLayer ({
+            url: "http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/2"
+        });
+
+
 
 
         // add feature from MapServer
@@ -205,6 +214,8 @@ require(["esri/Map",
         // load layers
         view.when(() => {
 
+            map.add(fLayer);
+            map.add(fLayer2);
             map.add(landGroup);
             map.add(districtsGroup);
             map.add(prop);

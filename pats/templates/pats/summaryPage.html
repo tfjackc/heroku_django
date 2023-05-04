@@ -89,9 +89,7 @@ Tax Status: {{feature.attributes.tax_status}}</p>
     </tr>
     <tr>
       <td class="table-dark">Structures</td>
-      {% for value in structure %}
-      <td>${{ value|intcomma }}</td>
-      {% endfor %}
+      <td>${{feature.attributes.rmv_improvements|intcomma}}</td>
     </tr>
     <tr>
       <td class="table-dark">Total</td>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GeoJson Machine</title>
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>  
+    {{map.header.render|safe}}
+    
+</head>
+<body>
+  <div class="container"><h3 style="font-family: consolas;">GeoJson: Create Data</h3></div>
+  {{map.html.render|safe}}
+  <script>
+    {{map.script.render|safe}}
+  </script>
+</body>
+</html>

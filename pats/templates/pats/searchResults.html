@@ -1,0 +1,62 @@
+{% extends 'pats/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+{% block content %}
+<!-- {% for feature in data.features %}
+{% endfor %} -->
+
+
+<!-- {{ html_table|safe }} -->
+  <div class="container">
+    <h2 class="text-left"><u>Search Results</u></h2><br>            
+    <table class="table table-dark table-striped table-hover" id="resultsTable">
+      <thead>
+        <tr>
+          <th>Map / Taxlot</th>
+          <th>Account</th>
+          <th>Owner Name</th>
+          <th>Property Addess (Situs)</th>
+          <th>Subdivision</th>
+          <th>Property Type</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if d %}  
+      {% for i in d %}
+        <tr>
+          <td>{{i.map_taxlot}}</td>
+          <td id="accountCol">{{i.account_id}}</td>
+          <td>{{i.owner_name}}</td>
+          <td>{{i.situs_address}}</td>
+          <td>{{i.subdivision}}</td>
+          <td>{{i.account_type}}</td>
+        </tr>
+      {% endfor %}
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <script type="text/javascript">
+
+    $('#resultsTable tbody').on('click', 'tr', function(e) {
+
+    let columns = $(this).find('td').map(function() {
+        return $(this).text();
+        }).get();
+    
+    const accountQuery = parseInt(columns[1]);
+   
+    window.location.href = "{% url 'account_query' 0 %}".replace(/0/, accountQuery)
+ 
+});
+
+  </script>
+
+{% endblock %}

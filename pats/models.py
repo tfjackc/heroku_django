@@ -98,6 +98,26 @@ class ContactInfo(models.Model):
         managed = False
         db_table = 'contact_info'
 
+class ContactMich(models.Model):
+    gid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    message = models.CharField(max_length=1000, blank=True, null=True)
+
+    def __str__(self):
+        return (
+            f"{self.name} "
+            f"{self.email}"
+            f"{self.message}"
+            f"({self.submitted_at:%Y-%m-%d %H:%M}): "
+        )
+
+    class Meta:
+        managed = False
+        db_table = 'contact_mich'
+
+    
+
 
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()

@@ -5,7 +5,7 @@ import json
 import requests
 
 
-def valuation(account):
+def tableSearchResults(account):
 
     prop_url = "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0/query"
     propValue_url = "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property_values/FeatureServer/0/query"

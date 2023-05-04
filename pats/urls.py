@@ -5,10 +5,11 @@ appname = 'pats'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('base/', views.base, name='base'),
     path('map/', views.mapPage, name='mapPage'),
-    #path('map/get/mapData', views.account_data, name='account_data'),
     path('<str:account>/', views.account_query, name='account_query'),
     path('<str:account>/valuation/', views.valuation, name='valuation'),
+    path('search/<str:name>/', views.tableSearchResults, name='tableSearchResults'),
    
     
 ]
