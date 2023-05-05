@@ -12,11 +12,22 @@
     {{map.header.render|safe}}
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-dark" style="margin-bottom: 0;">
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark" style="margin-bottom: 0;">
     <div class="container-fluid">
       <a class="navbar-brand" style="font-family: consolas; font-size: x-large;">GeoJSON Machine</a>
 
-        <a href="{% url 'contact_create_view' %}" class="navbar-brand">Jack Colpitt</a>
+      <div id="navbarNavDropdown" class="navbar-collapse collapse">
+
+        <ul class="navbar-nav ml-auto"> 
+            
+            <li class="nav-item">
+             <a href="{% url 'contact_create_view' %}" class="navbar-brand">Jack Colpitt</a>
+            </li>
+        </ul>
+    </div>
+
+
+
   
     </div>
   </nav>
@@ -28,8 +39,3 @@
 </body>
 </html>
 
-
-
-<!-- <h3 class="">GeoJSON Machine</h3> -->
-
-"navbar navbar-expand-lg bg-dark navbar-dark"

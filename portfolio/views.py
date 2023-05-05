@@ -164,7 +164,7 @@ class Draw(JSCSSMixin, MacroElement):
         }
         </style>
         """
-        export_button = """<a href='#' id='export'>Export</a>"""
+        export_button = """<a href='#' class="btn btn-info" id='export'>Export</a>"""
         if self.export:
             figure.header.add_child(Element(export_style), name="export")
             figure.html.add_child(Element(export_button), name="export_button")
@@ -178,10 +178,19 @@ class FoliumView(TemplateView):
         m = folium.Map(
             location=[46.982639, -108.519417],
             zoom_start=4,
-            tiles= 'openstreetmap' #'Stamen Terrain'
+            tiles= 'OpenStreetMap', #'Stamen Terrain'
+           
         )
-        m.add_to(figure)
+        
+        #public_token = "pk.eyJ1IjoidGZqYWNrYyIsImEiOiJjbGhhd3VsZHAwbHV1M3RudGt0bWFhNHl0In0.5qDpeYjN5r-rBh-SYA9Qgw"
 
+        folium.TileLayer(tiles='http://{s}.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGZqYWNrYyIsImEiOiJjbGhhd3VsZHAwbHV1M3RudGt0bWFhNHl0In0.5qDpeYjN5r-rBh-SYA9Qgw',
+        attr='<a href="https://www.mapbox.com/about/maps/">© Mapbox | </a>', name='satellite').add_to(m)
+
+        folium.LayerControl(position='topleft').add_to(m)
+
+
+        m.add_to(figure)
         # folium.Marker(
         #     location=[44.30291, -120.84585],
         #     popup='Prineville, OR',
