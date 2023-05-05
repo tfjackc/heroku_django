@@ -176,8 +176,8 @@ class FoliumView(TemplateView):
     def get_context_data(self, **kwargs):
         figure = folium.Figure()
         m = folium.Map(
-            location=[44.30291, -120.84585],
-            zoom_start=12,
+            location=[46.982639, -108.519417],
+            zoom_start=4,
             tiles= 'openstreetmap' #'Stamen Terrain'
         )
         m.add_to(figure)

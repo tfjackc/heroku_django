@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  {% load static %}
 <head>
     <meta charset="UTF-8">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <title>GeoJson Machine</title>
     <body>
     <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>  
     {{map.header.render|safe}}
-    
 </head>
 <body>
-  <div class="container"><h3 style="font-family: consolas;">GeoJson Machine</h3></div>
+  <nav class="navbar navbar-dark bg-dark" style="margin-bottom: 0;">
+    <div class="container-fluid">
+      <a class="navbar-brand" style="font-family: consolas; font-size: x-large;">GeoJSON Machine</a>
+
+        <a href="{% url 'contact_create_view' %}" class="navbar-brand">Jack Colpitt</a>
+  
+    </div>
+  </nav>
+  
   {{map.html.render|safe}}
   <script>
     {{map.script.render|safe}}
   </script>
 </body>
 </html>
+
+
+
+<!-- <h3 class="">GeoJSON Machine</h3> -->
+
+"navbar navbar-expand-lg bg-dark navbar-dark"
