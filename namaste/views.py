@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import json
 import requests
+from pats.models import ContactMich
 from .forms import ContactMichModelForm
 
 # Create your views here.
