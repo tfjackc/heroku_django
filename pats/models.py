@@ -117,9 +117,6 @@ class ContactMich(models.Model):
         managed = False
         db_table = 'contact_mich'
 
-    
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
