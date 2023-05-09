@@ -1,6 +1,5 @@
 from django import forms 
-from pats.models import ContactInfo, ContactMich
-
+from pats.models import ContactInfo
 
 class ContactForm(forms.Form):
     name = forms.CharField()
@@ -17,20 +16,6 @@ class ContactModelForm(forms.ModelForm):
             'message',
         ]
 
-class ContactMichForm(forms.Form):
-    name = forms.CharField()
-    email = forms.CharField()
-    message = forms.CharField()
-
-class ContactMichModelForm(forms.ModelForm):
-    message = forms.CharField(widget=forms.Textarea())
-    class Meta:
-        model = ContactMich
-        fields = [
-            'name',
-            'email',
-            'message',
-        ]
 #     validate form here
 
     # def __init__(self, *args, **kwargs):
