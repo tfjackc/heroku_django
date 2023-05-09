@@ -33,3 +33,12 @@
 #top_bg {
     padding: 50px;
 }
+
+@media only screen and (max-width: 500px) {
+    #top_bg {
+      padding: 0;
+    }
+    #card-holder {
+      padding: 0;
+    }
+  }

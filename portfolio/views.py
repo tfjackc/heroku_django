@@ -13,6 +13,7 @@ import branca
 from branca.element import Element, Figure, MacroElement
 from folium.features import ClickForLatLng, ClickForMarker, LatLngPopup
 from django.views.generic import TemplateView
+import geopandas as gpd
 
 
 class Draw(JSCSSMixin, MacroElement):
@@ -189,7 +190,6 @@ class FoliumView(TemplateView):
 
         folium.LayerControl(position='topleft').add_to(m)
 
-
         m.add_to(figure)
         # folium.Marker(
         #     location=[44.30291, -120.84585],
@@ -198,13 +198,9 @@ class FoliumView(TemplateView):
         # ).add_to(m)
 
         #m.add_child(ClickForMarker())
-        
+
         draw = Draw()
         draw.add_to(m)
-
-        # political_counties_url = ("http://geojson.xyz/naturalearth-3.3.0/ne_50m_admin_0_countries.geojson")
-
-        # folium.GeoJson(political_counties_url).add_to(m)
 
         figure.render()
         return {"map": figure}
