@@ -35,7 +35,7 @@ IS_HEROKU = "DYNO" in os.environ
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "False"
 
 if IS_HEROKU:
     ALLOWED_HOSTS = ["*"]
@@ -46,6 +46,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    "namaste.apps.NamasteConfig",
     "pats.apps.PatsConfig",
     "portfolio.apps.PortfolioConfig",
     "django.contrib.admin",

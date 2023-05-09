@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<link rel="stylesheet" href="{% static 'namaste/main.css' %}">
+</head>
+<body>
+<!-- As a heading -->
+<nav class="navbar navbar-custom">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Michelle Phillips</span>
+    </div>
+  </nav>
+<div style="background:linear-gradient(to top, #9BA5AE, #020B1A);">
+
+  <div class="container pb-5 pt-5 shadow-lg bg-body rounded" style="background-image: url(&quot;{% static 'namaste/hawaii_sunset.jpg' %}&quot;);">
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Welcome</h1>
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+            <p>
+              <a href="#" class="btn btn-primary my-2">Book Event</a>
+              <a href="#" class="btn btn-secondary my-2">Contact Information</a>
+            </p>
+          </div>
+        </div>
+      </section>
+  </div>
+</div>
+
+  <div id="card-holder" style="background-image: url(&quot;{% static 'namaste/oceanView.jpg' %}&quot;);">
+
+    <div class="container">
+
+    <div class="row justify-content-evenly">
+        <div class="col">
+            <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+                <video src=""></video>
+                <div class="card-body">
+                  <h5 class="card-title">New Year Yoga - You Are Awesome!</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+              </div>
+        </div>
+        <div class="col">
+            <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+                <video src=""></video>
+                <div class="card-body">
+                  <h5 class="card-title">Deepening Through Grounding</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+              </div>
+        </div>
+        
+      </div>
+
+      <div class="row justify-content-evenly mt-5">
+        <div class="col">
+            <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+                <video src=""></video>
+                <div class="card-body">
+                  <h5 class="card-title">Daylight Savings Time (Yoga for Morning)</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+              </div>
+            </div>
+              <div class="col">
+                <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+                    <video src=""></video>
+                    <div class="card-body">
+                      <h5 class="card-title">Deepening Through Alignment</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+            </div>
+       
+    </div>
+    </div>
+    </div>
+  
+
+  {% block content %}
+  {% endblock content %}
+</body>
+</html>
+
+

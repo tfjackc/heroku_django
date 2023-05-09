@@ -11,5 +11,4 @@ urlpatterns = [
     path('<str:account>/valuation/', views.valuation, name='valuation'),
     path('search/<str:name>/', views.tableSearchResults, name='tableSearchResults'),
    
-    
 ]
