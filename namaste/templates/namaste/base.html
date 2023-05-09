@@ -29,8 +29,8 @@
             <h1 class="fw-light">Welcome</h1>
             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
             <p>
-              <a href="#" class="btn btn-primary my-2">Book Event</a>
-              <a href="#" class="btn btn-secondary my-2">Contact Information</a>
+              <button type="button" id="book_event" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#bookEvent">Book Event</button>
+              <button type="button" id="contact_info" class="btn btn-secondary my-2" data-bs-toggle="modal" data-bs-target="#mich_bio">Contact Information</button>
             </p>
           </div>
         </div>
@@ -91,7 +91,54 @@
     </div>
     </div>
     </div>
-  
+
+    <!-- Book Event Modal -->
+<div class="modal fade" id="bookEvent" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...contact_mich form goes here...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Contact Info / Bio Modal -->
+<div class="modal fade" id="mich_bio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...bio / info goes here...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+
+  <!-- <script type="text/javascript">
+    var book_event = document.getElementById("book_event");
+    var contact_info = document.getElementById("contact_info");
+
+    book_event.addEventListener('shown.bs.modal', function () {
+
+    });
+  </script> -->
 
   {% block content %}
   {% endblock content %}
