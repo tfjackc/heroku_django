@@ -13,7 +13,7 @@ import branca
 from branca.element import Element, Figure, MacroElement
 from folium.features import ClickForLatLng, ClickForMarker, LatLngPopup
 from django.views.generic import TemplateView
-import geopandas as gpd
+
 
 
 class Draw(JSCSSMixin, MacroElement):
