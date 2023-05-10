@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load humanize %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -54,7 +55,7 @@
                 </div>
               </div>
         </div>
-        <div class="col">
+        <div id="second_col" class="col">
             <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
                 <video src=""></video>
                 <div class="card-body">
@@ -78,7 +79,7 @@
                 </div>
               </div>
             </div>
-              <div class="col">
+              <div id="second_col" class="col">
                 <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
                     <video src=""></video>
                     <div class="card-body">
@@ -98,25 +99,23 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Yoga Teaching & Sessions</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h4>Get in touch with me</h4>
+          <h6>Please enter your information below to book me for an event!</h6>
             <form method='POST' action=".">
               {% csrf_token %}
               {% render_field form.name placeholder="Enter Your Name" class+="form-control" style="margin-bottom: 20px;"%}
               {% render_field form.email placeholder="Enter Your Email" class+="form-control" style="margin-bottom: 20px;"%}
               {% render_field form.message placeholder="Enter A Message" class+="form-control" style="margin-bottom: 20px;"%}
-              <div class="col-12">
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button id="post" type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Submit</button>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -126,7 +125,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Michelle Phillps</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -134,7 +133,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Submit</button>
         </div>
       </div>
     </div>

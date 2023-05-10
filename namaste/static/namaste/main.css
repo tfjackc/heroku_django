@@ -1,3 +1,18 @@
+@media only screen and (max-width: 500px) {
+    #top_bg {
+      padding: 0;
+    }
+    #card-holder {
+      padding: 0;
+    }
+  }
+
+@media only screen and (max-width: 992px) {
+    #second_col {
+      margin-top: 48px;
+    }
+  }
+
 #html,
 #body {
     width: 100%;
@@ -34,11 +49,4 @@
     padding: 50px;
 }
 
-@media only screen and (max-width: 500px) {
-    #top_bg {
-      padding: 0;
-    }
-    #card-holder {
-      padding: 0;
-    }
-  }
+
