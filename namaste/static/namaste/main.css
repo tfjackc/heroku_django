@@ -18,6 +18,12 @@
     background-color: #cae9bd;
 }
 
+.btn {
+  background-color:#9FB593;
+  color: #fff;
+  
+}
+
 .container {
     padding: 20px;
 }
@@ -52,3 +58,4 @@
     margin-top: 28px;
   }
 }
+
