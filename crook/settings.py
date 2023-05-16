@@ -46,9 +46,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-    "namaste.apps.NamasteConfig",
     "pats.apps.PatsConfig",
-    "portfolio.apps.PortfolioConfig",
     "django.contrib.admin",
     "django.contrib.admindocs",
     "django.contrib.auth",
