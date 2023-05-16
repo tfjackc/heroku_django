@@ -103,15 +103,16 @@ if DEVELOPMENT_MODE is True:
     GEOS_LIBRARY_PATH = os.getenv('GEOS_PATH')
 
     DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('DATABASE_ENGINE'),
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
+
+        'default': {
+
+        'ENGINE': 'django.db.backends.sqlite3',
+
+        'NAME': os.getenv('SQLITE')
+
+        }
+
     }
-}
 
 
 # Password validation
