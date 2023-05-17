@@ -5,6 +5,21 @@ import requests
 import pandas as pd
 
 
+def base(request):
+
+    return render(request, 'pats/base.html')
+
+    
+def index(request):
+
+    return render(request, 'pats/index.html')
+    
+
+def mapPage(request):
+        
+    return render(request, 'pats/mapPage.html')
+
+
 def tableSearchResults(request, name):
 
     prop_url = "https://geo.co.crook.or.us/server/rest/services/Hosted/PATS_property/FeatureServer/0/query"
@@ -45,18 +60,6 @@ def tableSearchResults(request, name):
     
     return render(request, 'pats/searchResults.html', context)
 
-
-def mapPage(request):
-        
-    return render(request, 'pats/mapPage.html')
-
-def index(request):
-
-    return render(request, 'pats/index.html')
-
-def base(request):
-
-    return render(request, 'pats/base.html')
 
 def valuation(request, account):
 

@@ -4,7 +4,15 @@
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+
 {% block content %}
+
+<div class="container" style="margin-left: 0;">
+  <div class="row">
+  {% block sidebar %}
+  {% endblock sidebar %}
+<div class="col-md">
+
 
 {% for feature in data.features %}
 
@@ -117,4 +125,15 @@ Tax Status: {{feature.attributes.tax_status}}</p>
 </div>
 </div>
 {% endfor %}
+
+
+</div>
+</div>
+</div>
+
 {% endblock %}
+
+
+
+
+
