@@ -47,7 +47,7 @@
 }
 
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 992px) {
   #top_bg {
     padding: 0;
   }
@@ -61,4 +61,8 @@
 
 #blurb {
   padding: 10px;
+}
+
+.ratio.ratio-16x9 {
+  min-width: 300px;
 }

@@ -10,9 +10,9 @@
     height: 100%;
 }
 
-.col {
+/* .col {
     text-align: center;
-}
+} */
 
 .navbar-custom {
     background-color: #cae9bd;
@@ -47,7 +47,7 @@
 }
 
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 500px) {
   #top_bg {
     padding: 0;
   }
@@ -63,6 +63,3 @@
   padding: 10px;
 }
 
-.ratio.ratio-16x9 {
-  min-width: 300px;
-}
