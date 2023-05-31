@@ -218,7 +218,7 @@ def notebook(request):
     return render(request, 'portfolio/notebook.html')
 
 def sds_notebook(request):
-    return render(request, 'portfolio/L3shakemap.nb.html')
+    return render(request, 'portfolio/L3shakemap.html')
 
 def contact_create_view(request, *args, **kwargs):
 
