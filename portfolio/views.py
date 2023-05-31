@@ -217,9 +217,6 @@ def base(request):
 def notebook(request):
     return render(request, 'portfolio/notebook.html')
 
-def sds_notebook(request):
-    return render(request, 'portfolio/L3shakemap.html')
-
 def contact_create_view(request, *args, **kwargs):
 
     form = ContactModelForm(request.POST or None)
