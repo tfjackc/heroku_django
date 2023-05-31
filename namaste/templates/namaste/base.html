@@ -29,7 +29,7 @@
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">Welcome</h1>
-            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+            <p id="blurb" class="lead bg-dark text-white rounded bg-opacity-50 shadow-lg">I am a RYT 200 hr certified yoga teacher. My specialty is hatha yoga that pairs movement with story. I love bringing specific intentions to my classes that relate to holidays, sun and moon cycles, and personal growth goals. Book me for your festival, bachelorette party or a simple Sunday morning and I will cater our practice to your event needs!</p>
             <p>
               <button type="button" id="book_event" class="btn my-2" data-bs-toggle="modal" data-bs-target="#bookEvent">Book Event</button>
               <button type="button" id="contact_info" class="btn btn-custom my-2" data-bs-toggle="modal" data-bs-target="#mich_bio">Contact Information</button>
@@ -46,21 +46,25 @@
 
     <div class="row justify-content-evenly">
         <div id="top_card" class="col">
-            <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
-                <video src=""></video>
+            <div class="card w-100 h-100 shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+              <div class="ratio ratio-16x9">
+                <iframe type="video/mp4" class="embed-responsive-item" src="https://herokustatic.s3.us-west-2.amazonaws.com/NewYear.mp4"></iframe>
+              </div>
                 <div class="card-body">
                   <h5 class="card-title">New Year Yoga - You Are Awesome!</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                   <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
               </div>
         </div>
         <div id="second_col" class="col">
-            <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
-                <video src=""></video>
+            <div class="card w-100 h-100 shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+              <div class="ratio ratio-16x9">
+                <iframe type="video/mp4" class="embed-responsive-item" src="https://herokustatic.s3.us-west-2.amazonaws.com/Grounding.mp4"></iframe>
+              </div>
                 <div class="card-body">
                   <h5 class="card-title">Deepening Through Grounding</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                   <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
               </div>
@@ -70,21 +74,26 @@
 
       <div class="row justify-content-evenly mt-5">
         <div class="col">
-            <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
-                <video src=""></video>
+            <div class="card w-100 h-100 shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+              <div class="ratio ratio-16x9">
+                <iframe type="video/mp4" class="embed-responsive-item" src="https://herokustatic.s3.us-west-2.amazonaws.com/Daylight_Savings.mp4"></iframe>
+              </div>
+
                 <div class="card-body">
                   <h5 class="card-title">Daylight Savings Time (Yoga for Morning)</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                   <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
               </div>
             </div>
               <div id="second_col" class="col">
-                <div class="card w-100 h-100 mx-auto shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
-                    <video src=""></video>
+                <div class="card w-100 h-100 shadow-lg p-3 mb-5 bg-body rounded bg-opacity-10" style="width: 18rem;">
+                  <div class="ratio ratio-16x9">
+                    <iframe type="video/mp4" class="embed-responsive-item" src="https://herokustatic.s3.us-west-2.amazonaws.com/Alignment.mp4"></iframe>
+                  </div>
                     <div class="card-body">
                       <h5 class="card-title">Deepening Through Alignment</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                       <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
                   </div>
@@ -152,5 +161,4 @@
   {% endblock content %}
 </body>
 </html>
-
 
