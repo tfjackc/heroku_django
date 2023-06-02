@@ -32,3 +32,10 @@
     padding-bottom: 20px;
   }
 
+  .container.pt-3 {
+    padding: 50px;
+    background-size: cover; /* or "contain" depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
