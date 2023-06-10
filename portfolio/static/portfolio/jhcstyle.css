@@ -11,3 +11,10 @@ body {
     background-repeat: no-repeat;
 }
 
+/*.card.mb-3{*/
+/*    opacity: 0.8;*/
+/*}*/
+
+.navbar-brand {
+    padding-left: 50px;
+}
