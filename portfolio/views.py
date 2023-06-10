@@ -215,7 +215,7 @@ def base(request):
     return render(request, 'portfolio/base.html')
 
 def notebook(request):
-    return render(request, 'portfolio/notebook.html')
+    return render(request, 'portfolio/okieAnalysisV2.nb.html')
 
 def contact_create_view(request, *args, **kwargs):
 
