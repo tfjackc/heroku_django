@@ -1,6 +1,13 @@
+html,
+body {
+    height: 100%;
+}
+
 #pagebody {
+    min-height: 100vh;
     padding: 50px;
     background-size: cover; /* or "contain" depending on what you want */
     background-position: center center;
     background-repeat: no-repeat;
+    opacity: 0.8;
 }

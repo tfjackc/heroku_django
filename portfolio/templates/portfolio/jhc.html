@@ -13,31 +13,45 @@
 
 <link rel="stylesheet" href="{% static 'portfolio/jhcstyle.css' %}">
 {% block mainpage %}
-<div id="pagebody" style="background-image: url(&quot;{% static 'portfolio/city_research.png' %}&quot;);">
-<div class="card mb-3" style="max-width: 540px;">
+<div id="pagebody" style="background-image: url(&quot;{% static 'portfolio/viz.tin_hillshade_crop.jpg' %}&quot;);">
+<div class="card mb-3" style="max-width: 600px;">
   <div class="row g-0">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <img src="{% static 'portfolio/geojsonmachine.png' %}" class="img-fluid rounded-start" style="height: 100%;">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="card-body">
         <h5 class="card-title">GeoJSON Machine</h5>
         <p class="card-text">Create geospatial data on the fly and export through your browser</p>
-          <a class="btn btn-dark" href="{% url 'foliumMap' %}" role="button">App</a>
+        <a class="btn btn-dark" href="{% url 'foliumMap' %}" role="button">App</a>
       </div>
     </div>
   </div>
 </div>
-<div class="card mb-3" style="max-width: 540px;">
+<div class="card mb-3" style="max-width: 600px;">
   <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="...">
+    <div class="col-md-5">
+      <img src="{% static 'portfolio/okieR.png' %}" class="img-fluid rounded-start" style="height: 100%;">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <h5 class="card-title">Tornado Alley</h5>
+        <p class="card-text">Spatial data visualization within the R ecosystem.</p>
+        <a class="btn btn-dark" href="{% url 'notebook' %}" role="button">R Notebook</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mb-3" style="max-width: 600px;">
+  <div class="row g-0">
+    <div class="col-md-5">
+      <img src="{% static 'portfolio/eqapp.png' %}" class="img-fluid rounded-start" style="height: 100%;">
+    </div>
+    <div class="col-md-7">
+      <div class="card-body">
+        <h5 class="card-title">USGS Earthquakes</h5>
+        <p class="card-text">R Notebook displaying web GIS with the leaflet library</p>
+        <a class="btn btn-dark" href="#" role="button">R Notebook</a>
       </div>
     </div>
   </div>

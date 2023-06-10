@@ -32,20 +32,20 @@
 
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav">
-          <!-- <li class="nav-item">
-            <a href="{% url 'resume' %}" class="nav-link">Resume</a>
-          </li> -->
-            <li class="nav-item">
-            <a href="{% url 'foliumMap' %}" class="nav-link">GeoJSON Machine</a>
-          </li>
+{#          <!-- <li class="nav-item">#}
+{#            <a href="{% url 'resume' %}" class="nav-link">Resume</a>#}
+{#          </li> -->#}
+{#            <li class="nav-item">#}
+{#            <a href="{% url 'foliumMap' %}" class="nav-link">GeoJSON Machine</a>#}
+{#          </li>#}
 
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Contact
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#contactMe">Contact Me</a></li>
-            <li><a class="dropdown-item" href="#">Buisness Card</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#businessCard">Business Card</a></li>
           </ul>
         </li>
         </ul>
@@ -76,6 +76,28 @@
             </form>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="businessCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img src="{% static 'pats/crook_county_logo_lgr.jpg' %}" class="img-fluid" alt="...">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 class="card-title w-100 mx-auto">422 NW Beaver St. Prineville, OR 97754 <br />Office:  (541) 416-3930 Ext. 113<br />Mobile:  (918) 694-2110<br />E-mail:  Jack.Colpitt@crookcountyor.gov<br />Website: <a href="https://co.crook.or.us/gis">https://co.crook.or.us/gis</a><br />Prineville, Oregon</h5>
+                <ul class="card-text">
+                    <li class="fw-light">Advanced management, design, and maintenance of MySQL & PostgresSQL/PostGIS spatial databases</li>
+                    <li class="fw-light">Develop, maintain, and distribute web services through the ArcGIS Enterprise Portal & ArcGIS Server.</li>
+                    <li class="fw-light">Utilize Python programming to automate workflows, create custom geoprocessing tools & applications.</li>
+                    <li class="fw-light">Carry out spatial and other advanced GIS analysis in support of county departments and co-operating partners.</li>
+                </ul>
+              <p class="card-text"><small class="text-muted">Last updated 4/7/2023</small></p>
+        </div>
       </div>
     </div>
   </div>
