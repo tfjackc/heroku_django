@@ -16,10 +16,9 @@
 <!-- Importing Leaflet CSS and JS libraries -->
 
 {% leaflet_js %}
-{% leaflet_css %} 
-
-
+{% leaflet_css %}
 <link rel="stylesheet" href="{% static 'portfolio/portfoliomain.css' %}">
+<link rel="stylesheet" href="{% static 'portfolio/jhcstyle.css' %}">
 </head>
 <body>
   <!-- Navbar-->
@@ -39,12 +38,48 @@
             <li class="nav-item">
             <a href="{% url 'foliumMap' %}" class="nav-link">GeoJSON Machine</a>
           </li>
+
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#contactMe">Contact Me</a></li>
+            <li><a class="dropdown-item" href="#">Buisness Card</a></li>
+          </ul>
+        </li>
         </ul>
       </div>
     </div>
     
   </nav>
-  
+
+
+<div class="modal fade" id="contactMe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Contact Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6>Please enter your information below and I will get back to you!</h6>
+            <form method='POST' action=".">
+              {% csrf_token %}
+              {% render_field form.name placeholder="Enter Your Name" class+="form-control" style="margin-bottom: 20px;"%}
+              {% render_field form.email placeholder="Enter Your Email" class+="form-control" style="margin-bottom: 20px;"%}
+              {% render_field form.message placeholder="Enter A Message" class+="form-control" style="margin-bottom: 20px;"%}
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="post" type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   {% block mainpage %}
   {% endblock mainpage %}
   {% block notebook %}

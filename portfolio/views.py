@@ -211,11 +211,26 @@ def resume(request):
 def mainpage(request):
     return render(request, 'portfolio/mainpage.html')
 
-def base(request):
-    return render(request, 'portfolio/base.html')
+def base(request, *args, **kwargs):
+    form = ContactModelForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        # do some stuff
+        obj.save()
+        form = ContactModelForm()
+    return render(request, 'portfolio/base.html', {'form':form})
 
 def notebook(request):
     return render(request, 'portfolio/okieAnalysisV2.nb.html')
+
+def jhc(request):
+    form = ContactModelForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        # do some stuff
+        obj.save()
+        form = ContactModelForm()
+    return render(request, 'portfolio/jhc.html', {'form':form})
 
 def contact_create_view(request, *args, **kwargs):
 

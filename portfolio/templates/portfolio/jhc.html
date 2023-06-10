@@ -1,0 +1,47 @@
+{% extends 'portfolio/base.html' %}
+
+{% load leaflet_tags %}
+{% load static %}
+{% load humanize %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load widget_tweaks %}
+<!-- Importing Leaflet CSS and JS libraries -->
+{% leaflet_js %}
+{% leaflet_css %}
+
+<link rel="stylesheet" href="{% static 'portfolio/jhcstyle.css' %}">
+{% block mainpage %}
+<div id="pagebody" style="background-image: url(&quot;{% static 'portfolio/city_research.png' %}&quot;);">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{% static 'portfolio/geojsonmachine.png' %}" class="img-fluid rounded-start" style="height: 100%;">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">GeoJSON Machine</h5>
+        <p class="card-text">Create geospatial data on the fly and export through your browser</p>
+          <a class="btn btn-dark" href="{% url 'foliumMap' %}" role="button">App</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock mainpage %}
