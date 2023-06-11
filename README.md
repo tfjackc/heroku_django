@@ -4,7 +4,7 @@
 
 #### GEOG 863 Final Project -- https://pnw-geo.com/pats/map/
 
-#### GeoJSON Machine -- https://pnw-geo.com/portfolio/map/
+#### GeoJSON Machine -- [https://pnw-geo.com/portfolio/map/](https://www.pnw-geo.com/portfolio/map)
 
 #### Personal Site & Digital Business Card -- https://pnw-geo.com/portfolio/jhc/ 📫
 
