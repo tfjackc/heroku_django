@@ -1,41 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% load static %}
-<head>
-    <meta charset="UTF-8">
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    <title>GeoJson Machine</title>
-
-    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>  
-    {{map.header.render|safe}}
+{% extends 'portfolio/base.html' %}
+{% load leaflet_tags %}
+{% load static %}
+{% load humanize %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load widget_tweaks %}
+<!-- Importing Leaflet CSS and JS libraries -->
+{% leaflet_js %}
+{% leaflet_css %}
+<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+<title>GeoJson Machine</title>
+{% block mainpage %}
+{{map.header.render|safe}}
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark" style="margin-bottom: 0;">
-    <div class="container-fluid">
-      <a class="navbar-brand" style="font-family: consolas; font-size: x-large;">GeoJSON Machine</a>
-
-      <div id="navbarNavDropdown" class="navbar-collapse collapse">
-
-        <ul class="navbar-nav ml-auto"> 
-            
-            <li class="nav-item">
-             <a href="{% url 'jhc' %}" class="navbar-brand">Jack Colpitt</a>
-            </li>
-        </ul>
-    </div>
-
-
-
-  
-    </div>
-  </nav>
-  
+<h3 id="gjtitle">GeoJSON Machine</h3>
+ <!--geojson machine navbar went here -->
   {{map.html.render|safe}}
   <script>
     {{map.script.render|safe}}
   </script>
 </body>
 </html>
-
+{% endblock mainpage %}

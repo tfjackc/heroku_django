@@ -18,3 +18,21 @@ body {
 .navbar-brand {
     padding-left: 50px;
 }
+
+.nav-link.dropdown-toggle {
+    font-size: large;
+}
+
+#gjtitle {
+    font-family: consolas;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    padding: 10px;
+    padding-top: 20px;
+    margin: 50px;
+}
+

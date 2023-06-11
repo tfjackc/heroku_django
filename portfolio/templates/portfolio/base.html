@@ -19,12 +19,13 @@
 {% leaflet_css %}
 <link rel="stylesheet" href="{% static 'portfolio/portfoliomain.css' %}">
 <link rel="stylesheet" href="{% static 'portfolio/jhcstyle.css' %}">
+<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
 </head>
 <body>
   <!-- Navbar-->
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark" style="margin-bottom: 0;">
 
-      <a href="{% url 'contact_create_view' %}" class="navbar-brand">Jack Colpitt</a>
+      <a href="{% url 'jhc' %}" class="navbar-brand">Jack Colpitt <- GIS Analyst</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
         <span class="navbar-toggler-icon"></span>
@@ -44,8 +45,8 @@
             Contact
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#contactMe">Contact Me</a></li>
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#businessCard">Business Card</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#contactMe">Contact Me</a></li>
           </ul>
         </li>
         </ul>
