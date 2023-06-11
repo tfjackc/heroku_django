@@ -1,26 +1,27 @@
-{% extends 'portfolio/base.html' %}
-{% load leaflet_tags %}
-{% load static %}
-{% load humanize %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% load widget_tweaks %}
-<!-- Importing Leaflet CSS and JS libraries -->
-{% leaflet_js %}
-{% leaflet_css %}
-<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
-<title>GeoJson Machine</title>
-{% block mainpage %}
-{{map.header.render|safe}}
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+    <meta charset="UTF-8">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>GeoJson Machine</title>
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+    <link rel="stylesheet" href="{% static 'portfolio/jhcstyle.css' %}">
+    {{map.header.render|safe}}
 </head>
 <body>
-<h3 id="gjtitle">GeoJSON Machine</h3>
- <!--geojson machine navbar went here -->
+   <nav class="navbar navbar-expand-lg bg-dark navbar-dark" style="margin-bottom: 0;">
+      <a href="{% url 'jhc' %}" class="navbar-brand">Jack Colpitt <- GIS Analyst</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  </nav>
+   <h3 id="gjtitle">GeoJSON Machine</h3>
   {{map.html.render|safe}}
   <script>
     {{map.script.render|safe}}
   </script>
 </body>
 </html>
-{% endblock mainpage %}
