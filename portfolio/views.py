@@ -223,6 +223,9 @@ def base(request, *args, **kwargs):
 def notebook(request):
     return render(request, 'portfolio/okieAnalysisV2.nb.html')
 
+def usgs(request):
+    return render(request, 'portfolio/usgs_leaflet.nb.html')
+
 def jhc(request):
     form = ContactModelForm(request.POST or None)
     if form.is_valid():

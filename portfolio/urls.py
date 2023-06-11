@@ -9,7 +9,8 @@ urlpatterns = [
     path('', views.base, name='base'),
     path('map', FoliumView.as_view(), name='foliumMap'),
     path('jackcolpitt/', views.contact_create_view, name='contact_create_view'),
-    path('jackcolpitt/notebook/', views.notebook, name='notebook'),
     path('jackcolpitt/resume/', views.resume, name='resume'),
-    path('jhc/', views.jhc, name='jhc')
+    path('jhc/', views.jhc, name='jhc'),
+    path('jhc/notebook/', views.notebook, name='notebook'),
+    path('jhc/usgs_leaflet/', views.usgs, name='usgs')
 ]
