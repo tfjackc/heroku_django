@@ -7,7 +7,8 @@ appname = 'portfolio'
 
 urlpatterns = [
     path('', views.base, name='base'),
-    path('map', FoliumView.as_view(), name='foliumMap'),
+    path('foliumMap', FoliumView.as_view(), name='foliumMap'),
+    path('propertyMap/', views.patsMapPage, name='patsMapPage'),
     path('jackcolpitt/', views.contact_create_view, name='contact_create_view'),
     path('jackcolpitt/resume/', views.resume, name='resume'),
     path('jhc/', views.jhc, name='jhc'),

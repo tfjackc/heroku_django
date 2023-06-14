@@ -1,5 +1,5 @@
 from django import forms 
-from pats.models import ContactMich
+from portfolio.models import ContactMich
 
 class ContactMichForm(forms.Form):
     name = forms.CharField()

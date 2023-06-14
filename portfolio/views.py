@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from pats.models import ContactInfo
+from portfolio.models import ContactInfo
 from django.http import HttpResponse, HttpResponseRedirect
 import json
 import requests
@@ -15,6 +15,8 @@ from folium.features import ClickForLatLng, ClickForMarker, LatLngPopup
 from django.views.generic import TemplateView
 
 
+def patsMapPage(request):
+    return render(request, 'portfolio/patsMapPage.html')
 
 class Draw(JSCSSMixin, MacroElement):
     """

@@ -47,7 +47,6 @@ else:
 
 INSTALLED_APPS = [
     "namaste.apps.NamasteConfig",
-    "pats.apps.PatsConfig",
     "portfolio.apps.PortfolioConfig",
     "django.contrib.admin",
     "django.contrib.admindocs",
@@ -163,7 +162,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pats\static\pats')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'portfolio\static\portfolio')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type

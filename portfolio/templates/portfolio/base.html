@@ -33,13 +33,6 @@
 
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav">
-{#          <!-- <li class="nav-item">#}
-{#            <a href="{% url 'resume' %}" class="nav-link">Resume</a>#}
-{#          </li> -->#}
-{#            <li class="nav-item">#}
-{#            <a href="{% url 'foliumMap' %}" class="nav-link">GeoJSON Machine</a>#}
-{#          </li>#}
-
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Contact
@@ -50,9 +43,11 @@
           </ul>
         </li>
         </ul>
-      </div>
 
-    
+      </div>
+      <button style="margin-right: 10px;">
+                <a href="https://github.com/tfjackc"><img src="{% static 'portfolio/github.png' %}" class="img-fluid" style="height: 40px; width:40px;"></a>
+      </button>
   </nav>
 
 
@@ -86,7 +81,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <img src="{% static 'pats/crook_county_logo_lgr.jpg' %}" class="img-fluid" alt="...">
+          <img src="{% static 'portfolio/crook_county_logo_lgr.jpg' %}" class="img-fluid" alt="...">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
