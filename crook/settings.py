@@ -96,12 +96,11 @@ WSGI_APPLICATION = "crook.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "False"
+GDAL_LIBRARY_PATH = os.getenv('GDAL_PATH')
+GEOS_LIBRARY_PATH = os.getenv('GEOS_PATH')
 
 if DEVELOPMENT_MODE is True:
-
-    GDAL_LIBRARY_PATH = os.getenv('GDAL_PATH')
-    GEOS_LIBRARY_PATH = os.getenv('GEOS_PATH')
 
     DATABASES = {
     'default': {
@@ -114,6 +113,13 @@ if DEVELOPMENT_MODE is True:
     }
 }
 
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.getenv('SQLITE')
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
