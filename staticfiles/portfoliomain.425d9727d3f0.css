@@ -1,0 +1,31 @@
+@media(min-width: 992px) {
+    .news-input {
+        width: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+      overflow-x: auto;
+    }
+  
+  }
+
+.card {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+
+}
+
+  .col-md {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .container.pt-3 {
+    padding: 50px;
+    background-size: cover; /* or "contain" depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+

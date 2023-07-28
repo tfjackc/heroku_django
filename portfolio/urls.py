@@ -13,5 +13,6 @@ urlpatterns = [
     path('jackcolpitt/resume/', views.resume, name='resume'),
     path('jhc/', views.jhc, name='jhc'),
     path('jhc/notebook/', views.notebook, name='notebook'),
-    path('jhc/usgs_leaflet/', views.usgs, name='usgs')
+    path('jhc/usgs_leaflet/', views.usgs, name='usgs'),
+    #path('jhc/census_or', views.census, name='census')
 ]

@@ -228,6 +228,9 @@ def notebook(request):
 def usgs(request):
     return render(request, 'portfolio/usgs_leaflet.nb.html')
 
+# def census(request):
+#     return render(request, 'portfolio/censusRnotebook.nb.html')
+
 def jhc(request):
     form = ContactModelForm(request.POST or None)
     if form.is_valid():
